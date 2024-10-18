@@ -54,8 +54,48 @@ public class Interpreter implements Runnable {
         boolean sw = false;
 
         switch (token_command.getName()) {
-            case Token.USUARIO:
-                listener.usuario(token_event);
+            case Token.EMPLEADO:
+                listener.empleado(token_event);
+                sw = true;
+                break;
+            case Token.DOCTOR:
+                listener.doctor(token_event);
+                sw = true;
+                break;
+            case Token.PACIENTE:
+                listener.paciente(token_event);
+                sw = true;
+                break;
+            case Token.RESPONSABLE:
+                listener.responsable(token_event);
+                sw = true;
+                break;
+            case Token.PRODUCTO:
+                listener.producto(token_event);
+                sw = true;
+                break;
+            case Token.SALA:
+                listener.sala(token_event);
+                sw = true;
+                break;
+            case Token.SERVICIO:
+                listener.servicio(token_event);
+                sw = true;
+                break;
+            case Token.ASIGNACION:
+                listener.asignacion(token_event);
+                sw = true;
+                break;
+            case Token.SEGUIMIENTO:
+                listener.seguimiento(token_event);
+                sw = true;
+                break;
+            case Token.PAGO:
+                listener.pago(token_event);
+                sw = true;
+                break;
+            case Token.REPORTE:
+                listener.reporte(token_event);
                 sw = true;
                 break;
             

@@ -129,13 +129,13 @@ public class SendEmail {
             Session s = Session.getDefaultInstance(p);
 
             MimeMessage mensaje = new MimeMessage(s);
-            mensaje.setFrom(new InternetAddress("jesusjjt2002@gmail.com"));
+            mensaje.setFrom(new InternetAddress("grupo004sa@gmail.com"));
             mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(emailReceptor));
             mensaje.setSubject("NOTIFICACION");
             //mensaje.setText("informacion");
             mensaje.setContent(codigoHTML, "text/html");//
             Transport t = s.getTransport("smtp");
-            t.connect("jesusjjt2002@gmail.com", "gnhoznkvgmoyovui");
+            t.connect("grupo004sa@gmail.com", "cxlhqruueybqklkk");
             System.out.println("enviando...");
             t.sendMessage(mensaje, mensaje.getAllRecipients());
             t.close();
@@ -157,12 +157,12 @@ public class SendEmail {
             Session s = Session.getDefaultInstance(p);
 
             MimeMessage mensaje = new MimeMessage(s);
-            mensaje.setFrom(new InternetAddress("jesusjjt2002@gmail.com"));
+            mensaje.setFrom(new InternetAddress("grupo004sa@gmail.com"));
             mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(receptor));
             mensaje.setSubject(subject);
             mensaje.setText("enviado");
             Transport t = s.getTransport("smtp");
-            t.connect("jesusjjt2002@gmail.com", "gnhoznkvgmoyovui");
+            t.connect("grupo004sa@gmail.com", "cxlhqruueybqklkk");
             System.out.println("enviando...");
             t.sendMessage(mensaje, mensaje.getAllRecipients());
             t.close();

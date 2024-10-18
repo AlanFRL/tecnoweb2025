@@ -11,7 +11,17 @@ public class Token {
     public static final int END = 3;
     public static final int ERROR = 4;
     //CU    
-    public static final int USUARIO = 100;
+    public static final int EMPLEADO = 100;
+    public static final int DOCTOR = 101;
+    public static final int PACIENTE = 102;
+    public static final int RESPONSABLE = 103;
+    public static final int PRODUCTO = 104;
+    public static final int SALA = 105;
+    public static final int SERVICIO = 106;
+    public static final int ASIGNACION = 107;
+    public static final int SEGUIMIENTO = 108;
+    public static final int PAGO = 109;
+    public static final int REPORTE = 110;
 
     //ACCIONES        
     public static final int ELIMINAR = 200;
@@ -34,9 +44,18 @@ public class Token {
     public static final String LEXEME_ERROR = "error";
 
     //Titulos de casos de uso con string    
-    public static final String LEXEME_USUARIO = "usuario";
-
-
+    public static final String LEXEME_EMPLEADO = "empleado";
+    public static final String LEXEME_DOCTOR = "doctor";
+    public static final String LEXEME_PACIENTE = "paciente";
+    public static final String LEXEME_RESPONSABLE = "responsable";
+    public static final String LEXEME_PRODUCTO = "producto";
+    public static final String LEXEME_SALA = "sala";
+    public static final String LEXEME_SERVICIO = "servicio";
+    public static final String LEXEME_ASIGNACION = "asignacion";
+    public static final String LEXEME_SEGUIMIENTO = "seguimiento";
+    public static final String LEXEME_PAGO = "pago";
+    public static final String LEXEME_REPORTE = "reporte";
+    
     //Titulos de las acciones generales en string
     public static final String LEXEME_ELIMINAR = "eliminar";
     public static final String LEXEME_MODIFICAR = "modificar";
@@ -133,8 +152,28 @@ public class Token {
                 return LEXEME_ERROR;
 
             //CU            
-            case USUARIO:
-                return LEXEME_USUARIO;
+            case EMPLEADO:
+                return LEXEME_EMPLEADO;
+            case DOCTOR:
+                return LEXEME_DOCTOR;
+            case PACIENTE:
+                return LEXEME_PACIENTE;
+            case RESPONSABLE:
+                return LEXEME_RESPONSABLE;
+            case PRODUCTO:
+                return LEXEME_PRODUCTO;
+            case SALA:
+                return LEXEME_SALA;
+            case SERVICIO:
+                return LEXEME_SERVICIO;
+            case ASIGNACION:
+                return LEXEME_ASIGNACION;
+            case SEGUIMIENTO:
+                return LEXEME_SEGUIMIENTO;
+            case PAGO:
+                return LEXEME_PAGO;
+            case REPORTE:
+                return LEXEME_REPORTE;
 
             //ACCION
             case AGREGAR:
@@ -184,8 +223,28 @@ public class Token {
                 return ERROR;
 
             //CU             
-            case LEXEME_USUARIO:
-                return USUARIO;
+            case LEXEME_EMPLEADO:
+                return EMPLEADO;
+            case LEXEME_DOCTOR:
+                return DOCTOR;
+            case LEXEME_PACIENTE:
+                return PACIENTE;
+            case LEXEME_RESPONSABLE:
+                return RESPONSABLE;
+            case LEXEME_PRODUCTO:
+                return PRODUCTO;
+            case LEXEME_SALA:
+                return SALA;
+            case LEXEME_SERVICIO:
+                return SERVICIO;
+            case LEXEME_ASIGNACION:
+                return ASIGNACION;
+            case LEXEME_SEGUIMIENTO:
+                return SEGUIMIENTO;
+            case LEXEME_PAGO:
+                return PAGO;
+            case LEXEME_REPORTE:
+                return REPORTE;            
 
             //ACTION                
             case LEXEME_ELIMINAR:

@@ -51,7 +51,7 @@ public class Home {
         Interpreter interpreter = new Interpreter(email.getSubject().toLowerCase(), email.getFrom());
         String emailFrom = interpreter.getSender();
         interpreter.setListener(new ITokenEventListener() {
-
+            
             @Override
             public void usuario(TokenEvent event) {
                 System.out.println("CU: USUARIO");
