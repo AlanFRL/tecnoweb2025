@@ -7,6 +7,8 @@ import Comunication.TokenEvent;
 public interface ITokenEventListener {
     // CASOS DE USO\
     // Usuarios
+    void usuario(TokenEvent event);
+    
     void empleado(TokenEvent event);
     void doctor(TokenEvent event);
     // Personas
