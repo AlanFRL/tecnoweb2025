@@ -6,7 +6,10 @@ import Utils.ImprimirTabla;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DtoResponsable {
@@ -22,6 +25,9 @@ public class DtoResponsable {
     // Método para agregar un nuevo responsable (proxy)
     public void agregar(String ci, String nombre, String direccion, char genero, String fechaNacimiento, int telefono, String ocupacion) throws SQLException {
         try {
+            // Conversión de la fecha de nacimiento a java.sql.Date en formato dd/MM/yyyy
+            java.sql.Date fechaNacimientoDate = (java.sql.Date) convertirFecha(fechaNacimiento);
+
             // Convertir género a mayúscula
             char generoUpper = Character.toUpperCase(genero);
 
@@ -32,7 +38,7 @@ public class DtoResponsable {
             psPeople.setString(2, nombre);
             psPeople.setString(3, direccion);
             psPeople.setString(4, String.valueOf(generoUpper)); // Usar el género en mayúscula
-            psPeople.setString(5, fechaNacimiento);
+            psPeople.setDate(5, fechaNacimientoDate); // Usar la fecha convertida
 
             if (psPeople.executeUpdate() == 0) {
                 System.err.println("Ocurrió un error al insertar en People");
@@ -68,6 +74,9 @@ public class DtoResponsable {
             // Convertir género a mayúscula
             char generoUpper = Character.toUpperCase(genero);
 
+            // Conversión de la fecha de nacimiento a java.sql.Date en formato dd/MM/yyyy
+            java.sql.Date fechaNacimientoDate = (java.sql.Date) convertirFecha(fechaNacimiento);
+
             String query = "UPDATE people SET ci=?, name=?, address=?, gender=?, birth_date=? WHERE id=?;"
                     + "UPDATE proxies SET phone_number=?, occupation=? WHERE id=?";
             PreparedStatement ps = conexion.EstablecerConexion().prepareStatement(query);
@@ -76,7 +85,7 @@ public class DtoResponsable {
             ps.setString(2, nombre);
             ps.setString(3, direccion);
             ps.setString(4, String.valueOf(generoUpper)); // Usar el género en mayúscula
-            ps.setString(5, fechaNacimiento);
+            ps.setDate(5, fechaNacimientoDate); // Usar la fecha convertida
             ps.setInt(6, id);
             ps.setInt(7, telefono);
             ps.setString(8, ocupacion);
@@ -89,6 +98,18 @@ public class DtoResponsable {
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
+        }
+    }
+
+    // Método para convertir String a java.sql.Date con formato dd/MM/yyyy
+    private Date convertirFecha(String fechaStr) throws SQLException {
+        try {
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date fechaUtil = formatoFecha.parse(fechaStr);
+            return new java.sql.Date(fechaUtil.getTime()); // Convertir a java.sql.Date
+        } catch (ParseException e) {
+            System.err.println("Error de formato en la fecha: " + fechaStr);
+            throw new SQLException("Formato de fecha inválido. Use 'dd/MM/yyyy'.");
         }
     }
 
@@ -182,8 +203,8 @@ public class DtoResponsable {
     public String getComandos() {
         return "COMANDOS PARA CU: RESPONSABLE<br>"
                 + "responsable listar<br>"
-                + "responsable agregar [ci; nombre; direccion; genero; fechaNacimiento; telefono; ocupacion]<br>"
-                + "responsable modificar [id; ci; nombre; direccion; genero; fechaNacimiento; telefono; ocupacion]<br>"
+                + "responsable agregar [ci; nombre; direccion; genero; fechaNacimiento(dd/MM/YYYY); telefono; ocupacion]<br>"
+                + "responsable modificar [id; ci; nombre; direccion; genero; fechaNacimiento(dd/MM/YYYY); telefono; ocupacion]<br>"
                 + "responsable eliminar [id]";
     }
 }

@@ -7,6 +7,7 @@ import Negocio.Interpreter;
 import Interfaces.ITokenEventListener;
 import Utils.Token;
 import Comunication.TokenEvent;
+import Negocio.NegConsulta;
 import Negocio.NegDoctor;
 import Negocio.NegEmpleado;
 import Negocio.NegFicha;
@@ -14,7 +15,10 @@ import Negocio.NegPaciente;
 import Negocio.NegPago;
 import Negocio.NegResponsable;
 import Negocio.NegSala;
+import Negocio.NegTratamiento;
 import Negocio.NegUsuario;
+import Negocio.NegConsulta;
+import Negocio.NegVacuna;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -57,7 +61,10 @@ public class Home {
         NegEmpleado empleado = new NegEmpleado();
         NegPaciente paciente = new NegPaciente();
         NegResponsable responsable = new NegResponsable();
-
+        NegTratamiento tratamiento = new NegTratamiento();
+        NegConsulta consulta = new NegConsulta();
+        NegVacuna vacuna = new NegVacuna();
+        
         Interpreter interpreter = new Interpreter(email.getSubject().toLowerCase(), email.getFrom());
         String emailFrom = interpreter.getSender();
         interpreter.setListener(new ITokenEventListener() {
@@ -915,17 +922,332 @@ public class Home {
 
             @Override
             public void tratamiento(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                System.out.println("CU: TRATAMIENTO");
+                System.out.println(event);
+                SendEmail respuesta = new SendEmail();
+
+                try {
+                    if (event.getAction() == Token.LISTAR) {
+                        if (event.getParams().size() == 0) {
+                            String lista = tratamiento.listar(email.getFrom());
+                            System.out.println(lista);
+                            System.out.println("listar ok");
+                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.AGREGAR) {
+                        if (event.getParams().size() == 4) { // id_paciente, id_empleado, origen, id_habitacion
+                            tratamiento.agregar(event.getParams());
+                            System.out.println("agregación ok");
+                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.MODIFICAR) {
+                        if (event.getParams().size() == 6) { // id, id_paciente, id_empleado, precio, origen, id_habitacion
+                            tratamiento.modificar(event.getParams());
+                            System.out.println("modificación ok");
+                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.ELIMINAR) {
+                        if (event.getParams().size() == 1) { // id
+                            tratamiento.eliminar(Integer.parseInt(event.getParams().get(0)));
+                            System.out.println("eliminación ok");
+                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.HELP) {
+                        if (event.getParams().size() == 0) {
+                            System.out.println(tratamiento.getComandos());
+                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(tratamiento.getComandos()));
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(tratamiento.getComandos()));
+                                return;
+                            }
+                        } else {
+                            System.out.println("help no necesita parámetros");
+                            respuesta.responseUser(email.getFrom(), "COMANDO DESCONOCIDO");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "COMANDO DESCONOCIDO");
+                                return;
+                            }
+                        }
+                    } else {
+                        System.out.println("ACCIÓN DESCONOCIDA DE CU: TRATAMIENTO");
+                        respuesta.responseUser(email.getFrom(), "COMANDO DESCONOCIDO");
+                        if (true) {
+                            JOptionPane.showMessageDialog(null, "COMANDO DESCONOCIDO");
+                            return;
+                        }
+                    }
+                } catch (Exception ex) {
+                    System.out.println("Mensaje SQL: " + ex.getMessage());
+                    respuesta.responseUser(email.getFrom(), "MENSAJE SQL: " + ex.getMessage());
+                    if (true) {
+                        JOptionPane.showMessageDialog(null, "MENSAJE SQL: " + ex.getMessage());
+                        return;
+                    }
+                }
             }
 
             @Override
             public void consulta(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                System.out.println("CU: CONSULTA");
+                System.out.println(event);
+                SendEmail respuesta = new SendEmail();
+
+                try {
+                    if (event.getAction() == Token.LISTAR) {
+                        if (event.getParams().size() == 0) {
+                            String lista = consulta.listar(email.getFrom());
+                            System.out.println(lista);
+                            System.out.println("listar ok");
+                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.AGREGAR) {
+                        if (event.getParams().size() == 4) { // id_paciente, id_empleado, fecha, motivo
+                            consulta.agregar(event.getParams());
+                            System.out.println("agregación ok");
+                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.MODIFICAR) {
+                        if (event.getParams().size() == 6) { // id, id_paciente, id_empleado, precio, fecha, motivo
+                            consulta.modificar(event.getParams());
+                            System.out.println("modificación ok");
+                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.ELIMINAR) {
+                        if (event.getParams().size() == 1) { // id
+                            consulta.eliminar(Integer.parseInt(event.getParams().get(0)));
+                            System.out.println("eliminación ok");
+                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.HELP) {
+                        if (event.getParams().size() == 0) {
+                            System.out.println(consulta.getComandos());
+                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(consulta.getComandos()));
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(consulta.getComandos()));
+                                return;
+                            }
+                        } else {
+                            System.out.println("help no necesita parámetros");
+                            respuesta.responseUser(email.getFrom(), "COMANDO DESCONOCIDO");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "COMANDO DESCONOCIDO");
+                                return;
+                            }
+                        }
+                    } else {
+                        System.out.println("ACCIÓN DESCONOCIDA DE CU: CONSULTA");
+                        respuesta.responseUser(email.getFrom(), "COMANDO DESCONOCIDO");
+                        if (true) {
+                            JOptionPane.showMessageDialog(null, "COMANDO DESCONOCIDO");
+                            return;
+                        }
+                    }
+                } catch (Exception ex) {
+                    System.out.println("Mensaje SQL: " + ex.getMessage());
+                    respuesta.responseUser(email.getFrom(), "MENSAJE SQL: " + ex.getMessage());
+                    if (true) {
+                        JOptionPane.showMessageDialog(null, "MENSAJE SQL: " + ex.getMessage());
+                        return;
+                    }
+                }
             }
 
             @Override
             public void vacuna(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                System.out.println("CU: VACUNA");
+                System.out.println(event);
+                SendEmail respuesta = new SendEmail();
+
+                try {
+                    if (event.getAction() == Token.LISTAR) {
+                        if (event.getParams().size() == 0) {
+                            String lista = vacuna.listar(email.getFrom());
+                            System.out.println(lista);
+                            System.out.println("listar ok");
+                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.AGREGAR) {
+                        if (event.getParams().size() == 3) { // id_paciente, id_empleado, nombre
+                            vacuna.agregar(event.getParams());
+                            System.out.println("agregación ok");
+                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.MODIFICAR) {
+                        if (event.getParams().size() == 5) { // id, id_paciente, id_empleado, precio, nombre
+                            vacuna.modificar(event.getParams());
+                            System.out.println("modificación ok");
+                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.ELIMINAR) {
+                        if (event.getParams().size() == 1) { // id
+                            vacuna.eliminar(Integer.parseInt(event.getParams().get(0)));
+                            System.out.println("eliminación ok");
+                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.HELP) {
+                        if (event.getParams().size() == 0) {
+                            System.out.println(vacuna.getComandos());
+                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(vacuna.getComandos()));
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(vacuna.getComandos()));
+                                return;
+                            }
+                        } else {
+                            System.out.println("help no necesita parámetros");
+                            respuesta.responseUser(email.getFrom(), "COMANDO DESCONOCIDO");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "COMANDO DESCONOCIDO");
+                                return;
+                            }
+                        }
+                    } else {
+                        System.out.println("ACCIÓN DESCONOCIDA DE CU: VACUNA");
+                        respuesta.responseUser(email.getFrom(), "COMANDO DESCONOCIDO");
+                        if (true) {
+                            JOptionPane.showMessageDialog(null, "COMANDO DESCONOCIDO");
+                            return;
+                        }
+                    }
+                } catch (Exception ex) {
+                    System.out.println("Mensaje SQL: " + ex.getMessage());
+                    respuesta.responseUser(email.getFrom(), "MENSAJE SQL: " + ex.getMessage());
+                    if (true) {
+                        JOptionPane.showMessageDialog(null, "MENSAJE SQL: " + ex.getMessage());
+                        return;
+                    }
+                }
             }
 
             @Override

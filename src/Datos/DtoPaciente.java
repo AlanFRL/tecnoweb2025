@@ -216,8 +216,8 @@ public class DtoPaciente {
     public String getComandos() {
         return "COMANDOS PARA CU: PACIENTE<br>"
                 + "paciente listar<br>"
-                + "paciente agregar [ci; nombre; direccion; genero; fechaNacimiento; tipoSangre; factorRH; responsableId]<br>"
-                + "paciente modificar [id; ci; nombre; direccion; genero; fechaNacimiento; tipoSangre; factorRH; responsableId]<br>"
+                + "paciente agregar [ci; nombre; direccion; genero; fechaNacimiento(dd/MM/YYYY); tipoSangre; factorRH; responsableId]<br>"
+                + "paciente modificar [id; ci; nombre; direccion; genero; fechaNacimiento(dd/MM/YYYY); tipoSangre; factorRH; responsableId]<br>"
                 + "paciente eliminar [id]";
     }
 }
