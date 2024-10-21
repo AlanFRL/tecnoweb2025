@@ -17,11 +17,15 @@ public class Token {
     public static final int RESPONSABLE = 103;
     public static final int PRODUCTO = 104;
     public static final int SALA = 105;
-    public static final int SERVICIO = 106;
+    public static final int TRATAMIENTO = 106;
     public static final int ASIGNACION = 107;
     public static final int SEGUIMIENTO = 108;
     public static final int PAGO = 109;
     public static final int REPORTE = 110;
+    public static final int CONSULTA = 111;
+    public static final int VACUNA = 112;
+    // PAPILLA
+    public static final int ASOCIAR = 113;
 
     //ACCIONES        
     public static final int ELIMINAR = 200;
@@ -50,12 +54,15 @@ public class Token {
     public static final String LEXEME_RESPONSABLE = "responsable";
     public static final String LEXEME_PRODUCTO = "producto";
     public static final String LEXEME_SALA = "sala";
-    public static final String LEXEME_SERVICIO = "servicio";
+    public static final String LEXEME_TRATAMIENTO = "tratamiento";
     public static final String LEXEME_ASIGNACION = "asignacion";
     public static final String LEXEME_SEGUIMIENTO = "seguimiento";
     public static final String LEXEME_PAGO = "pago";
     public static final String LEXEME_REPORTE = "reporte";
-    
+    public static final String LEXEME_CONSULTA = "consulta";
+    public static final String LEXEME_VACUNA = "vacuna";
+    public static final String LEXEME_ASOCIAR = "asociar";
+
     //Titulos de las acciones generales en string
     public static final String LEXEME_ELIMINAR = "eliminar";
     public static final String LEXEME_MODIFICAR = "modificar";
@@ -164,8 +171,8 @@ public class Token {
                 return LEXEME_PRODUCTO;
             case SALA:
                 return LEXEME_SALA;
-            case SERVICIO:
-                return LEXEME_SERVICIO;
+            case TRATAMIENTO:
+                return LEXEME_TRATAMIENTO;
             case ASIGNACION:
                 return LEXEME_ASIGNACION;
             case SEGUIMIENTO:
@@ -174,6 +181,12 @@ public class Token {
                 return LEXEME_PAGO;
             case REPORTE:
                 return LEXEME_REPORTE;
+            case CONSULTA:
+                return LEXEME_CONSULTA;
+            case VACUNA:
+                return LEXEME_VACUNA;
+            case ASOCIAR:
+                return LEXEME_ASOCIAR;
 
             //ACCION
             case AGREGAR:
@@ -235,8 +248,8 @@ public class Token {
                 return PRODUCTO;
             case LEXEME_SALA:
                 return SALA;
-            case LEXEME_SERVICIO:
-                return SERVICIO;
+            case LEXEME_TRATAMIENTO:
+                return TRATAMIENTO;
             case LEXEME_ASIGNACION:
                 return ASIGNACION;
             case LEXEME_SEGUIMIENTO:
@@ -244,7 +257,13 @@ public class Token {
             case LEXEME_PAGO:
                 return PAGO;
             case LEXEME_REPORTE:
-                return REPORTE;            
+                return REPORTE;
+            case LEXEME_CONSULTA:
+                return CONSULTA;
+            case LEXEME_VACUNA:
+                return VACUNA;
+            case LEXEME_ASOCIAR:
+                return ASOCIAR;
 
             //ACTION                
             case LEXEME_ELIMINAR:

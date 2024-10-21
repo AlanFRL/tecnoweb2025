@@ -78,8 +78,8 @@ public class Interpreter implements Runnable {
                 listener.sala(token_event);
                 sw = true;
                 break;
-            case Token.SERVICIO:
-                listener.servicio(token_event);
+            case Token.TRATAMIENTO:
+                listener.tratamiento(token_event);
                 sw = true;
                 break;
             case Token.ASIGNACION:
@@ -98,7 +98,19 @@ public class Interpreter implements Runnable {
                 listener.reporte(token_event);
                 sw = true;
                 break;
-            
+            case Token.CONSULTA:
+                listener.consulta(token_event);
+                sw = true;
+                break;
+            case Token.VACUNA:
+                listener.vacuna(token_event);
+                sw = true;
+                break;
+            case Token.ASOCIAR:
+                listener.asociar(token_event);
+                sw = true;
+                break;
+
         }
         if (!sw) {
             listener.posibleserrores(token_event);

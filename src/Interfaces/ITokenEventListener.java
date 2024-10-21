@@ -15,11 +15,15 @@ public interface ITokenEventListener {
     
     void producto(TokenEvent event);
     void sala(TokenEvent event);    
-    void servicio(TokenEvent event);
+    void tratamiento(TokenEvent event);
     void asignacion(TokenEvent event);
     void seguimiento(TokenEvent event);
     void pago(TokenEvent event);
     void reporte(TokenEvent event);
+    void consulta(TokenEvent event);
+    void vacuna(TokenEvent event);
+    void asociar(TokenEvent event);
+
     
     void error(TokenEvent event);
     void posibleserrores(TokenEvent event);
