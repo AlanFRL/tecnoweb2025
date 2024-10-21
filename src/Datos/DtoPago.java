@@ -19,20 +19,34 @@ public class DtoPago {
         this.imprimirTabla = new ImprimirTabla();
     }
 
-    // Método para agregar un nuevo pago sin especificar el ID
-    public void agregar(int serviceId, String fecha, float total, char paymentType) throws SQLException {
+    // Método para agregar un nuevo pago sin especificar el ID y sin ingresar el total manualmente
+    public void agregar(int serviceId, String fecha, char paymentType) throws SQLException {
         try {
-            String query = "INSERT INTO payments(service_id, date, total, payment_type) VALUES(?, ?, ?, ?);";
-            PreparedStatement ps = conexion.EstablecerConexion().prepareStatement(query);
-            ps.setInt(1, serviceId);
-            java.sql.Date sqlDate = java.sql.Date.valueOf(fecha);
-            ps.setDate(2, sqlDate);
-            ps.setFloat(3, total);
-            ps.setString(4, String.valueOf(paymentType).toUpperCase());  // Convertir el char a mayúscula y luego a String
+            // Consultar el precio del servicio correspondiente
+            String priceQuery = "SELECT price FROM services WHERE id = ?;";
+            PreparedStatement pricePs = conexion.EstablecerConexion().prepareStatement(priceQuery);
+            pricePs.setInt(1, serviceId);
+            ResultSet priceRs = pricePs.executeQuery();
 
-            if (ps.executeUpdate() == 0) {
-                System.err.println("Ocurrió un error al insertar en Payments");
-                throw new SQLException();
+            if (priceRs.next()) {
+                float total = priceRs.getFloat("price");
+
+                // Insertar el pago en la tabla payments
+                String query = "INSERT INTO payments(service_id, date, total, payment_type) VALUES(?, ?, ?, ?);";
+                PreparedStatement ps = conexion.EstablecerConexion().prepareStatement(query);
+                ps.setInt(1, serviceId);
+                java.sql.Date sqlDate = java.sql.Date.valueOf(fecha);
+                ps.setDate(2, sqlDate);
+                ps.setFloat(3, total);
+                ps.setString(4, String.valueOf(paymentType).toUpperCase());  // Convertir el char a mayúscula y luego a String
+
+                if (ps.executeUpdate() == 0) {
+                    System.err.println("Ocurrió un error al insertar en Payments");
+                    throw new SQLException();
+                }
+            } else {
+                System.err.println("No se encontró el servicio con el ID especificado");
+                throw new SQLException("Service not found");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -41,20 +55,39 @@ public class DtoPago {
     }
 
 // Método para modificar un pago existente
-    public void modificar(int id, int serviceId, String fecha, float total, char paymentType) throws SQLException {
-        String query = "UPDATE payments SET service_id=?, date=?, total=?, payment_type=? WHERE id=?;";
-        PreparedStatement ps = conexion.EstablecerConexion().prepareStatement(query);
-        ps.setInt(1, serviceId);
-        java.sql.Date sqlDate = java.sql.Date.valueOf(fecha);
-        ps.setDate(2, sqlDate);
-        ps.setFloat(3, total);
-        ps.setString(4, String.valueOf(paymentType).toUpperCase()); // Asegurarse de que el tipo de pago sea mayúscula
-        ps.setInt(5, id); // Este es el ID del pago a modificar
+    public void modificar(int id, int serviceId, String fecha, char paymentType) throws SQLException {
+        try {
+            // Consultar el precio del servicio correspondiente
+            String priceQuery = "SELECT price FROM services WHERE id = ?;";
+            PreparedStatement pricePs = conexion.EstablecerConexion().prepareStatement(priceQuery);
+            pricePs.setInt(1, serviceId);
+            ResultSet priceRs = pricePs.executeQuery();
 
-        int rowsAffected = ps.executeUpdate();
-        if (rowsAffected == 0) {
-            System.err.println("Ocurrió un error al modificar en Payments");
-            throw new SQLException("Pago no encontrado");
+            if (priceRs.next()) {
+                float total = priceRs.getFloat("price");
+
+                // Actualizar el pago en la tabla payments
+                String query = "UPDATE payments SET service_id=?, date=?, total=?, payment_type=? WHERE id=?;";
+                PreparedStatement ps = conexion.EstablecerConexion().prepareStatement(query);
+                ps.setInt(1, serviceId);
+                java.sql.Date sqlDate = java.sql.Date.valueOf(fecha);
+                ps.setDate(2, sqlDate);
+                ps.setFloat(3, total);
+                ps.setString(4, String.valueOf(paymentType).toUpperCase()); // Asegurarse de que el tipo de pago sea mayúscula
+                ps.setInt(5, id); // Este es el ID del pago a modificar
+
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected == 0) {
+                    System.err.println("Ocurrió un error al modificar en Payments");
+                    throw new SQLException("Pago no encontrado");
+                }
+            } else {
+                System.err.println("No se encontró el servicio con el ID especificado");
+                throw new SQLException("Service not found");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
         }
     }
 
@@ -120,8 +153,8 @@ public class DtoPago {
     public String getComandos() {
         return "COMANDOS PARA CU: PAGO<br>"
                 + "pago listar<br>"
-                + "pago agregar [id; service_id; payment_type; fecha; total]<br>"
-                + "pago modificar [id; service_id; payment_type; fecha; total]<br>"
+                + "pago agregar [service_id; fecha; payment_type]<br>"
+                + "pago modificar [id; service_id; fecha; payment_type]<br>"
                 + "pago eliminar [id]";
     }
 }

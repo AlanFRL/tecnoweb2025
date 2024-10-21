@@ -777,7 +777,7 @@ public class Home {
                             }
                         }
                     } else if (event.getAction() == Token.AGREGAR) {
-                        if (event.getParams().size() == 4) { // id, service_id, fecha, total
+                        if (event.getParams().size() == 3) { // id, service_id, fecha, total
                             pago.agregar(event.getParams());
                             System.out.println("agregación ok");
                             respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS CORRECTAMENTE");
@@ -794,7 +794,7 @@ public class Home {
                             }
                         }
                     } else if (event.getAction() == Token.MODIFICAR) {
-                        if (event.getParams().size() == 5) { // id, service_id, fecha, total
+                        if (event.getParams().size() == 4) { // id, service_id, fecha, total
                             pago.modificar(event.getParams());
                             System.out.println("modificación ok");
                             respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS CORRECTAMENTE");
