@@ -49,7 +49,41 @@ public class SendEmail {
         this.user_receptor = user_receptor;
     }
 
-    public void responseUser(String Receptor, String data) {
+    public void responseUser(String emailReceptor, String data) {
+        try {
+            // Establecer las propiedades para el envío de correo
+            Properties p = new Properties();
+            p.put("mail.smtp.host", "smtp.gmail.com");
+            p.put("mail.smtp.starttls.enable", "true");
+            p.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+            p.put("mail.smtp.port", "587");
+            p.put("mail.smtp.auth", "true");
+
+            // Crear una sesión de correo
+            Session s = Session.getDefaultInstance(p);
+
+            // Crear el mensaje de correo
+            MimeMessage mensaje = new MimeMessage(s);
+            mensaje.setFrom(new InternetAddress("grupo004sa@gmail.com"));
+            mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(emailReceptor));
+            mensaje.setSubject("NOTIFICACION");
+            mensaje.setText(data); // Establecer el texto del mensaje
+
+            // Establecer la conexión con el servidor SMTP y enviar el mensaje
+            Transport t = s.getTransport("smtp");
+            t.connect("grupo004sa@gmail.com", "cxlhqruueybqklkk");
+            System.out.println("Enviando respuesta al comando...");
+            t.sendMessage(mensaje, mensaje.getAllRecipients());
+            t.close();
+            System.out.println("Respuesta enviada al comando: " + data);
+        } catch (MessagingException ex) {
+            Logger.getLogger(SendEmail.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Correo no enviado.");
+        }
+    }
+
+    // Método original responseUser copiado sin cambios
+    public void responseUserOriginal(String Receptor, String data) {
         String comando = "";
         try {
             socket = new Socket(SERVER, PORT_SMTP);
