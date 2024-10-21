@@ -82,8 +82,8 @@ public class Interpreter implements Runnable {
                 listener.tratamiento(token_event);
                 sw = true;
                 break;
-            case Token.ASIGNACION:
-                listener.asignacion(token_event);
+            case Token.FICHA:
+                listener.ficha(token_event);
                 sw = true;
                 break;
             case Token.SEGUIMIENTO:

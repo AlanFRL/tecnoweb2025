@@ -16,7 +16,7 @@ public interface ITokenEventListener {
     void producto(TokenEvent event);
     void sala(TokenEvent event);    
     void tratamiento(TokenEvent event);
-    void asignacion(TokenEvent event);
+    void ficha(TokenEvent event);
     void seguimiento(TokenEvent event);
     void pago(TokenEvent event);
     void reporte(TokenEvent event);

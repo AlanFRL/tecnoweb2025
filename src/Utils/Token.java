@@ -18,7 +18,7 @@ public class Token {
     public static final int PRODUCTO = 104;
     public static final int SALA = 105;
     public static final int TRATAMIENTO = 106;
-    public static final int ASIGNACION = 107;
+    public static final int FICHA = 107;
     public static final int SEGUIMIENTO = 108;
     public static final int PAGO = 109;
     public static final int REPORTE = 110;
@@ -55,7 +55,7 @@ public class Token {
     public static final String LEXEME_PRODUCTO = "producto";
     public static final String LEXEME_SALA = "sala";
     public static final String LEXEME_TRATAMIENTO = "tratamiento";
-    public static final String LEXEME_ASIGNACION = "asignacion";
+    public static final String LEXEME_FICHA = "ficha";
     public static final String LEXEME_SEGUIMIENTO = "seguimiento";
     public static final String LEXEME_PAGO = "pago";
     public static final String LEXEME_REPORTE = "reporte";
@@ -173,8 +173,8 @@ public class Token {
                 return LEXEME_SALA;
             case TRATAMIENTO:
                 return LEXEME_TRATAMIENTO;
-            case ASIGNACION:
-                return LEXEME_ASIGNACION;
+            case FICHA:
+                return LEXEME_FICHA;
             case SEGUIMIENTO:
                 return LEXEME_SEGUIMIENTO;
             case PAGO:
@@ -250,8 +250,8 @@ public class Token {
                 return SALA;
             case LEXEME_TRATAMIENTO:
                 return TRATAMIENTO;
-            case LEXEME_ASIGNACION:
-                return ASIGNACION;
+            case LEXEME_FICHA:
+                return FICHA;
             case LEXEME_SEGUIMIENTO:
                 return SEGUIMIENTO;
             case LEXEME_PAGO:
