@@ -98,7 +98,7 @@ public class MailVerificationThread implements Runnable {
             // Enviar USER y verificar respuesta
             output.writeBytes("USER " + email + "\r\n");
             String userResponse = input.readLine();
-            System.out.println("Respuesta después de USER: " + userResponse);
+            System.out.println("Respuesta despues de USER: " + userResponse);
             if (userResponse == null || userResponse.contains("-ERR")) {
                 throw new IOException("Error en USER: " + userResponse);
             }
@@ -106,7 +106,7 @@ public class MailVerificationThread implements Runnable {
             // Enviar PASS y verificar respuesta
             output.writeBytes("PASS " + password + "\r\n");
             String passResponse = input.readLine();
-            System.out.println("Respuesta después de PASS: " + passResponse);
+            System.out.println("Respuesta despues de PASS: " + passResponse);
             if (passResponse == null || passResponse.contains("-ERR")) {
                 throw new IOException("Error en PASS: " + passResponse);
             }

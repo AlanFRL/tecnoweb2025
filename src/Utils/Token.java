@@ -36,6 +36,7 @@ public class Token {
     public static final int GENERAR = 205;
     public static final int HELP = 206;
     public static final int REGISTRAR = 209;
+    public static final int ALTA = 210;
 
     public static final int ERROR_COMMAND = 300;
     public static final int ERROR_CHARACTER = 301;
@@ -72,6 +73,7 @@ public class Token {
     public static final String LEXEME_GENERAR = "generar";
     public static final String LEXEME_REGISTRAR = "registrar";
     public static final String LEXEME_HELP = "help";
+    public static final String LEXEME_ALTA = "alta";
 
     public static final String LEXEME_ERROR_COMMAND = "UNKNOWN COMMAND";
     public static final String LEXEME_ERROR_CHARACTER = "UNKNOWN CHARACTER";
@@ -205,6 +207,8 @@ public class Token {
                 return LEXEME_HELP;
             case REGISTRAR:
                 return LEXEME_REGISTRAR;
+            case ALTA:
+                return LEXEME_ALTA;
 
             case ERROR_COMMAND:
                 return LEXEME_ERROR_COMMAND;
@@ -282,6 +286,8 @@ public class Token {
                 return HELP;
             case LEXEME_REGISTRAR:
                 return REGISTRAR;
+            case LEXEME_ALTA:
+                return ALTA;
             case LEXEME_ERROR_COMMAND:
                 return ERROR_COMMAND;
             case LEXEME_ERROR_CHARACTER:

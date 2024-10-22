@@ -7,7 +7,7 @@ import Negocio.Interpreter;
 import Interfaces.ITokenEventListener;
 import Utils.Token;
 import Comunication.TokenEvent;
-import Negocio.NegConsulta;
+import Negocio.NegAsociar;
 import Negocio.NegDoctor;
 import Negocio.NegEmpleado;
 import Negocio.NegFicha;
@@ -64,7 +64,8 @@ public class Home {
         NegTratamiento tratamiento = new NegTratamiento();
         NegConsulta consulta = new NegConsulta();
         NegVacuna vacuna = new NegVacuna();
-        
+        NegAsociar asociar = new NegAsociar();
+
         Interpreter interpreter = new Interpreter(email.getSubject().toLowerCase(), email.getFrom());
         String emailFrom = interpreter.getSender();
         interpreter.setListener(new ITokenEventListener() {
@@ -101,9 +102,9 @@ public class Home {
                                 }
                                 empleado.agregar(event.getParams());
                                 System.out.println("agregación ok");
-                                respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                                respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS DEL EMPLEADO CORRECTAMENTE");
                                 if (true) {
-                                    JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                                    JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS DEL EMPLEADO CORRECTAMENTE");
                                     return;
                                 }
                             } else {
@@ -120,9 +121,9 @@ public class Home {
                                 if (event.getParams().size() == 7) { // id, ci, nombre, password, teléfono, dirección, ocupacion
                                     empleado.modificar(event.getParams());
                                     System.out.println("modificación ok");
-                                    respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                                    respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS DEL EMPLEADO CORRECTAMENTE");
                                     if (true) {
-                                        JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                                        JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS DEL EMPLEADO CORRECTAMENTE");
                                         return;
                                     }
                                 } else {
@@ -138,9 +139,9 @@ public class Home {
                                     if (event.getParams().size() == 1) {
                                         empleado.eliminar(Integer.parseInt(event.getParams().get(0)));
                                         System.out.println("eliminación ok");
-                                        respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                                        respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS DEL EMPLEADO CORRECTAMENTE");
                                         if (true) {
-                                            JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                                            JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS DEL EMPLEADO CORRECTAMENTE");
                                             return;
                                         }
                                     } else {
@@ -218,9 +219,9 @@ public class Home {
                             if (event.getParams().size() == 6) { // ci, nombre, password, teléfono, dirección, número_ss
                                 doctor.agregar(event.getParams());
                                 System.out.println("agregación ok");
-                                respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                                respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS DEL DOCTOR CORRECTAMENTE");
                                 if (true) {
-                                    JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                                    JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS DEL DOCTOR CORRECTAMENTE");
                                     return;
                                 }
                             } else {
@@ -237,9 +238,9 @@ public class Home {
                                 if (event.getParams().size() == 7) { // id, ci, nombre, password, teléfono, dirección, número_ss
                                     doctor.modificar(event.getParams());
                                     System.out.println("modificación ok");
-                                    respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                                    respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS DEL DOCTOR CORRECTAMENTE");
                                     if (true) {
-                                        JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                                        JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS DEL DOCTOR CORRECTAMENTE");
                                         return;
                                     }
                                 } else {
@@ -255,9 +256,9 @@ public class Home {
                                     if (event.getParams().size() == 1) {
                                         doctor.eliminar(Integer.parseInt(event.getParams().get(0)));
                                         System.out.println("eliminación ok");
-                                        respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                                        respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS DEL DOCTOR CORRECTAMENTE");
                                         if (true) {
-                                            JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                                            JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS DEL DOCTOR CORRECTAMENTE");
                                             return;
                                         }
                                     } else {
@@ -336,9 +337,9 @@ public class Home {
                         if (event.getParams().size() == 8) { // ci, nombre, direccion, genero, fechaNacimiento, tipoSangre, factorRH, proxyId
                             paciente.agregar(event.getParams());
                             System.out.println("agregación ok");
-                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS DEL PACIENTE CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS DEL PACIENTE CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -353,9 +354,9 @@ public class Home {
                         if (event.getParams().size() == 9) { // id, ci, nombre, direccion, genero, fechaNacimiento, tipoSangre, factorRH, proxyId
                             paciente.modificar(event.getParams());
                             System.out.println("modificación ok");
-                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS DEL PACIENTE CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS DEL PACIENTE CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -370,9 +371,9 @@ public class Home {
                         if (event.getParams().size() == 1) {
                             paciente.eliminar(Integer.parseInt(event.getParams().get(0)));
                             System.out.println("eliminación ok");
-                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS DEL PACIENTE CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS DEL PACIENTE CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -446,9 +447,9 @@ public class Home {
                         if (event.getParams().size() == 7) { // ci, nombre, direccion, genero, fechaNacimiento, telefono, ocupacion
                             responsable.agregar(event.getParams());
                             System.out.println("agregación ok");
-                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS DEL RESPONSABLE CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS DEL RESPONSABLE CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -463,9 +464,9 @@ public class Home {
                         if (event.getParams().size() == 8) { // id, ci, nombre, direccion, genero, fechaNacimiento, telefono, ocupacion
                             responsable.modificar(event.getParams());
                             System.out.println("modificación ok");
-                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS DEL RESPONSABLE CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS DEL RESPONSABLE CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -480,9 +481,9 @@ public class Home {
                         if (event.getParams().size() == 1) {
                             responsable.eliminar(Integer.parseInt(event.getParams().get(0)));
                             System.out.println("eliminación ok");
-                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS DEL RESPONSABLE CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS DEL RESPONSABLE CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -557,9 +558,9 @@ public class Home {
                         if (event.getParams().size() == 2) { // id, capacidad, habitaciones disponibles
                             sala.agregar(event.getParams());
                             System.out.println("agregación ok");
-                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS DE LA SALA CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS DE LA SALA CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -574,9 +575,9 @@ public class Home {
                         if (event.getParams().size() == 3) { // id, capacidad, habitaciones disponibles
                             sala.modificar(event.getParams());
                             System.out.println("modificación ok");
-                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS DE LA SALA CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS DE LA SALA CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -591,9 +592,9 @@ public class Home {
                         if (event.getParams().size() == 1) {
                             sala.eliminar(Integer.parseInt(event.getParams().get(0)));
                             System.out.println("eliminación ok");
-                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS DE LA SALA CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS DE LA SALA CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -665,9 +666,9 @@ public class Home {
                         if (event.getParams().size() == 5) { // doctor_id, consult_id, symptoms, diagnosis, notes
                             ficha.agregar(event.getParams());
                             System.out.println("agregación ok");
-                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS DE LA HOJA DE ATENCION/FICHA CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS DE LA HOJA DE ATENCION/FICHA CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -682,9 +683,9 @@ public class Home {
                         if (event.getParams().size() == 5) { // id, doctor_id, consult_id, symptoms, diagnosis, notes
                             ficha.modificar(event.getParams());
                             System.out.println("modificación ok");
-                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS DE LA HOJA DE ATENCION/FICHA CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS DE LA HOJA DE ATENCION/FICHA CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -699,9 +700,9 @@ public class Home {
                         if (event.getParams().size() == 1) {
                             ficha.eliminar(Integer.parseInt(event.getParams().get(0)));
                             System.out.println("eliminación ok");
-                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS DE LA HOJA DE ATENCION/FICHA CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS DE LA HOJA DE ATENCION/FICHA CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -763,7 +764,6 @@ public class Home {
                             String lista = pago.listar(event.getSender());
                             System.out.println(lista);
                             System.out.println("listar ok");
-                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
                             if (true) {
                                 JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
                                 return;
@@ -780,9 +780,9 @@ public class Home {
                         if (event.getParams().size() == 3) { // id, service_id, fecha, total
                             pago.agregar(event.getParams());
                             System.out.println("agregación ok");
-                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS DEL PAGO CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS DEL PAGO CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -797,9 +797,9 @@ public class Home {
                         if (event.getParams().size() == 4) { // id, service_id, fecha, total
                             pago.modificar(event.getParams());
                             System.out.println("modificación ok");
-                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS DEL PAGO CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS DEL PAGO CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -814,9 +814,9 @@ public class Home {
                         if (event.getParams().size() == 1) {
                             pago.eliminar(Integer.parseInt(event.getParams().get(0)));
                             System.out.println("eliminación ok");
-                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS DEL PAGO CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS DEL PAGO CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -949,9 +949,9 @@ public class Home {
                         if (event.getParams().size() == 4) { // id_paciente, id_empleado, origen, id_habitacion
                             tratamiento.agregar(event.getParams());
                             System.out.println("agregación ok");
-                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS DEL SERVICIO TRATAMIENTO CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS DEL SERVICIO TRATAMIENTO CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -966,9 +966,9 @@ public class Home {
                         if (event.getParams().size() == 6) { // id, id_paciente, id_empleado, precio, origen, id_habitacion
                             tratamiento.modificar(event.getParams());
                             System.out.println("modificación ok");
-                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS DEL SERVICIO TRATAMIENTO CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS DEL SERVICIO TRATAMIENTO CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -983,9 +983,26 @@ public class Home {
                         if (event.getParams().size() == 1) { // id
                             tratamiento.eliminar(Integer.parseInt(event.getParams().get(0)));
                             System.out.println("eliminación ok");
-                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS DEL SERVICIO TRATAMIENTO CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS DEL SERVICIO TRATAMIENTO CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.ALTA) {
+                        if (event.getParams().size() == 1) { // id
+                            tratamiento.alta(Integer.parseInt(event.getParams().get(0)));
+                            System.out.println("alta ok");
+                            respuesta.responseUser(email.getFrom(), "SE DIO DE ALTA EL TRATAMIENTO Y SE LIBERÓ LA HABITACIÓN CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE DIO DE ALTA EL TRATAMIENTO Y SE LIBERÓ LA HABITACIÓN CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -1042,7 +1059,6 @@ public class Home {
                             String lista = consulta.listar(email.getFrom());
                             System.out.println(lista);
                             System.out.println("listar ok");
-                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
                             if (true) {
                                 JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
                                 return;
@@ -1059,9 +1075,9 @@ public class Home {
                         if (event.getParams().size() == 4) { // id_paciente, id_empleado, fecha, motivo
                             consulta.agregar(event.getParams());
                             System.out.println("agregación ok");
-                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS DEL SERVICIO CONSULTA CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS DEL SERVICIO CONSULTA CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -1076,9 +1092,9 @@ public class Home {
                         if (event.getParams().size() == 6) { // id, id_paciente, id_empleado, precio, fecha, motivo
                             consulta.modificar(event.getParams());
                             System.out.println("modificación ok");
-                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS DEL SERVICIO CONSULTA CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS DEL SERVICIO CONSULTA CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -1093,9 +1109,9 @@ public class Home {
                         if (event.getParams().size() == 1) { // id
                             consulta.eliminar(Integer.parseInt(event.getParams().get(0)));
                             System.out.println("eliminación ok");
-                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS DEL SERVICIO CONSULTA CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS DEL SERVICIO CONSULTA CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -1152,7 +1168,6 @@ public class Home {
                             String lista = vacuna.listar(email.getFrom());
                             System.out.println(lista);
                             System.out.println("listar ok");
-                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
                             if (true) {
                                 JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
                                 return;
@@ -1169,9 +1184,9 @@ public class Home {
                         if (event.getParams().size() == 3) { // id_paciente, id_empleado, nombre
                             vacuna.agregar(event.getParams());
                             System.out.println("agregación ok");
-                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS DEL SERVICIO VACUNA CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS DEL SERVICIO VACUNA CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -1186,9 +1201,9 @@ public class Home {
                         if (event.getParams().size() == 5) { // id, id_paciente, id_empleado, precio, nombre
                             vacuna.modificar(event.getParams());
                             System.out.println("modificación ok");
-                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS DEL SERVICIO VACUNA CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS DEL SERVICIO VACUNA CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -1203,9 +1218,9 @@ public class Home {
                         if (event.getParams().size() == 1) { // id
                             vacuna.eliminar(Integer.parseInt(event.getParams().get(0)));
                             System.out.println("eliminación ok");
-                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS DEL SERVICIO VACUNA CORRECTAMENTE");
                             if (true) {
-                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS CORRECTAMENTE");
+                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS DEL SERVICIO VACUNA CORRECTAMENTE");
                                 return;
                             }
                         } else {
@@ -1252,7 +1267,111 @@ public class Home {
 
             @Override
             public void asociar(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                System.out.println("CU: ASOCIAR");
+                System.out.println(event);
+                SendEmail respuesta = new SendEmail();
+
+                try {
+                    if (event.getAction() == Token.LISTAR) {
+                        if (event.getParams().size() == 0) {
+                            String lista = asociar.listar(email.getFrom());
+                            System.out.println(lista);
+                            System.out.println("listar ok");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.AGREGAR) {
+                        if (event.getParams().size() == 3) { // id_comida, id_tratamiento, cantidad
+                            asociar.agregar(event.getParams());
+                            System.out.println("asociación agregada ok");
+                            respuesta.responseUser(email.getFrom(), "SE AGREGÓ LA ASOCIACIÓN CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE AGREGÓ LA ASOCIACIÓN CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.MODIFICAR) {
+                        if (event.getParams().size() == 3) { // id_comida, id_tratamiento, nueva_cantidad
+                            asociar.modificar(event.getParams());
+                            System.out.println("modificación de asociación ok");
+                            respuesta.responseUser(email.getFrom(), "SE MODIFICÓ LA ASOCIACIÓN CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE MODIFICÓ LA ASOCIACIÓN CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.ELIMINAR) {
+                        if (event.getParams().size() == 2) { // id_comida, id_tratamiento
+                            asociar.eliminar(event.getParams());
+                            System.out.println("eliminación de asociación ok");
+                            respuesta.responseUser(email.getFrom(), "SE ELIMINÓ LA ASOCIACIÓN CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE ELIMINÓ LA ASOCIACIÓN CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.HELP) {
+                        if (event.getParams().size() == 0) {
+                            System.out.println(asociar.getComandos());
+                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(asociar.getComandos()));
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(asociar.getComandos()));
+                                return;
+                            }
+                        } else {
+                            System.out.println("help no necesita parámetros");
+                            respuesta.responseUser(email.getFrom(), "COMANDO DESCONOCIDO");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "COMANDO DESCONOCIDO");
+                                return;
+                            }
+                        }
+                    } else {
+                        System.out.println("ACCIÓN DESCONOCIDA DE CU: ASOCIAR");
+                        respuesta.responseUser(email.getFrom(), "COMANDO DESCONOCIDO");
+                        if (true) {
+                            JOptionPane.showMessageDialog(null, "COMANDO DESCONOCIDO");
+                            return;
+                        }
+                    }
+                } catch (Exception ex) {
+                    System.out.println("Mensaje SQL: " + ex.getMessage());
+                    respuesta.responseUser(email.getFrom(), "MENSAJE SQL: " + ex.getMessage());
+                    if (true) {
+                        JOptionPane.showMessageDialog(null, "MENSAJE SQL: " + ex.getMessage());
+                        return;
+                    }
+                }
             }
 
         }

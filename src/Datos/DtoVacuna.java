@@ -167,7 +167,6 @@ public class DtoVacuna {
                 + "vacuna listar<br>"
                 + "vacuna agregar [id_paciente; id_empleado; nombre]<br>"
                 + "vacuna modificar [id; id_paciente; id_empleado; precio; nombre]<br>"
-                + "vacuna eliminar [id]<br>"
-                + "vacuna obtener [id]";
+                + "vacuna eliminar [id]<br>";
     }
 }

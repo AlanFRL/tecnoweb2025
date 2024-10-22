@@ -192,7 +192,6 @@ public class DtoConsulta {
                 + "consulta listar<br>"
                 + "consulta agregar [id_paciente; id_empleado; fecha(dd/MM/YYYY); motivo]<br>"
                 + "consulta modificar [id; id_paciente; id_empleado; precio; fecha(dd/MM/YYYY); motivo]<br>"
-                + "consulta eliminar [id]<br>"
-                + "consulta obtener [id]";
+                + "consulta eliminar [id]<br>";
     }
 }

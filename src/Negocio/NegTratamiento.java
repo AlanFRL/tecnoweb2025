@@ -28,7 +28,7 @@ public class NegTratamiento {
             // Llamar al método agregar del DtoTratamiento
             dtoTratamiento.agregar(patientId, employeeId, origin, roomId);
             dtoTratamiento.desconectar();
-            System.out.println("Tratamiento agregado exitosamente.");
+            System.out.println("Tratamiento agregado exitosamente con estado 'activo'.");
         } catch (SQLException e) {
             System.out.println("Error al agregar el tratamiento: " + e.getMessage());
             throw e;
@@ -69,6 +69,19 @@ public class NegTratamiento {
         }
     }
 
+    // tratamiento alta[id]
+    public void alta(int id) throws SQLException {
+        try {
+            // Llamar al método alta del DtoTratamiento
+            dtoTratamiento.alta(id);
+            dtoTratamiento.desconectar();
+            System.out.println("El estado del tratamiento se cambió a 'alta' y se liberó la habitación.");
+        } catch (SQLException e) {
+            System.out.println("Error al dar de alta el tratamiento: " + e.getMessage());
+            throw e;
+        }
+    }
+
     // tratamiento listar
     public String listar(String emailFrom) throws SQLException {
         try {
@@ -78,19 +91,6 @@ public class NegTratamiento {
             return tratamientos;
         } catch (SQLException e) {
             System.out.println("Error al listar los tratamientos: " + e.getMessage());
-            throw e;
-        }
-    }
-
-    // tratamiento obtener[id]
-    public String obtenerPorId(int id) throws SQLException {
-        try {
-            // Llamar al método obtenerTratamientoPorId del DtoTratamiento
-            String tratamiento = dtoTratamiento.obtenerTratamientoPorId(id);
-            dtoTratamiento.desconectar();
-            return tratamiento;
-        } catch (SQLException e) {
-            System.out.println("Error al obtener el tratamiento: " + e.getMessage());
             throw e;
         }
     }
