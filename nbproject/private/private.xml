@@ -3,31 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< Updated upstream
-            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Datos/DtoEmpleado.java</file>
-            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Comunication/MailVerificationThread.java</file>
+            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Datos/DtoConsulta.java</file>
+            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Negocio/NegConsulta.java</file>
             <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Datos/DtoPaciente.java</file>
-            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Negocio/NegPaciente.java</file>
-            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Negocio/NegResponsable.java</file>
-            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/P1TecnoWeb/Principal.java</file>
+            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Datos/DtoResponsable.java</file>
+            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Datos/DtoTratamiento.java</file>
             <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Comunication/Home.java</file>
             <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Comunication/SendEmail.java</file>
-            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Negocio/NegDoctor.java</file>
-            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Utils/Token.java</file>
-            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Negocio/Interpreter.java</file>
-            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Interfaces/ITokenEventListener.java</file>
-            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Datos/DtoResponsable.java</file>
-            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Datos/DtoDoctor.java</file>
-=======
-            <file>file:/D:/Universidad/TecnologiaWeb/Parcial/P1TecnoWeb/src/Utils/Token.java</file>
-            <file>file:/D:/Universidad/TecnologiaWeb/Parcial/P1TecnoWeb/src/Negocio/Interpreter.java</file>
-            <file>file:/D:/Universidad/TecnologiaWeb/Parcial/P1TecnoWeb/src/Datos/DtoFicha.java</file>
-            <file>file:/D:/Universidad/TecnologiaWeb/Parcial/P1TecnoWeb/src/Negocio/NegFicha.java</file>
-            <file>file:/D:/Universidad/TecnologiaWeb/Parcial/P1TecnoWeb/src/Comunication/Home.java</file>
-            <file>file:/D:/Universidad/TecnologiaWeb/Parcial/P1TecnoWeb/src/Negocio/NegSala.java</file>
-            <file>file:/D:/Universidad/TecnologiaWeb/Parcial/P1TecnoWeb/src/Datos/DtoSala.java</file>
-            <file>file:/D:/Universidad/TecnologiaWeb/Parcial/P1TecnoWeb/src/Interfaces/ITokenEventListener.java</file>
->>>>>>> Stashed changes
+            <file>file:/D:/Universidad/Semestre_9/TecnoWeb/PrimerParcial/P1TecnoWeb/src/Datos/DtoPago.java</file>
         </group>
     </open-files>
 </project-private>

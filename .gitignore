@@ -1,1 +1,41 @@
+# Directorios de compilación
+/build/
 /dist/
+/nbproject/private/
+
+# Archivos generados por NetBeans
+nbproject/private/
+/nbbuild/
+/.nb-gradle/
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de logs
+*.log
+
+# Archivos de respaldo
+*.bak
+*.swp
+*~
+
+# Archivos de Ant
+*.war
+*.ear
+*.jar
+*.class
+
+# Archivos específicos de Java
+*.iml
+*.ipr
+*.iws
+
+# Archivos de configuración de NetBeans
+/nbproject/private/
+/nbproject/build-impl.xml
+
+# Archivos temporales
+*.tmp
+*.temp
+
