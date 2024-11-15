@@ -24,7 +24,9 @@ Thumbs.db
 *.war
 *.ear
 *.jar
-*.class
+
+# Permitir archivos .jar en la carpeta /Librerias
+!Librerias/*.jar
 
 # Archivos específicos de Java
 *.iml
@@ -38,4 +40,3 @@ Thumbs.db
 # Archivos temporales
 *.tmp
 *.temp
-
