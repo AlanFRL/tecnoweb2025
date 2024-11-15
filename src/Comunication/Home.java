@@ -857,8 +857,10 @@ public class Home {
 
             @Override
             public void seguimiento(TokenEvent event) {
-                NegSeguimiento seguimiento = new NegSeguimiento();
+                //NegSeguimiento seguimiento = new NegSeguimiento();
                 SendEmail respuesta = new SendEmail();
+                System.out.println("CU: SEGUIMIENTO");
+                System.out.println(event);
 
                 try {
                     if (event.getAction() == Token.LISTAR) {
@@ -1585,7 +1587,9 @@ public class Home {
                 try {
                     if (event.getAction() == Token.PAGOS) {
                         if (event.getParams().size() == 3) {
+                            System.out.println("antes de ejecutar reporte pagos");
                             String lista = reporte.pagos(emailFrom,event.getParams());
+                            System.out.println("despues de ejecutar reporte pagos");
                             System.out.println(lista);
                             System.out.println("listar ok");
                             if (true) {
@@ -1653,6 +1657,8 @@ public class Home {
                     
                 } catch (Exception ex) {
                     System.out.println("Mensaje SQL: " + ex.getMessage());
+                    System.err.println("[Control] Error al ejecutar el reporte: " + ex.getMessage());
+                    ex.printStackTrace();
                     if (true) {
                         JOptionPane.showMessageDialog(null, "MENSAJE SQL: " + ex.getMessage());
                         respuesta.responseUser(email.getFrom(), "MENSAJE SQL: " + ex.getMessage());

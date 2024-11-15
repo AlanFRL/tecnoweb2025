@@ -29,68 +29,66 @@ public class DtoReporte {
         this.imprimirTabla = new ImprimirTabla();
     }
 
-    // Reporte de pagos por servicio en un rango de fechas, opcionalmente filtrado por tipo de servicio
     public String pagos(String emailFrom, String fecha_ini, String fecha_fin, String tipo_servicio) throws SQLException {
-        // Conversión de String a Date en formato dd/MM/yyyy
-        java.sql.Date fecha_inicial = convertirFecha(fecha_ini);
-        java.sql.Date fecha_final = convertirFecha(fecha_fin);
-        
-         // Query sin concatenación condicional
+        System.out.println("[DtoReporte] Iniciando reporte de pagos");
+        String fecha_inicial = convertirFechaFormatoCadena(fecha_ini);
+        String fecha_final = convertirFechaFormatoCadena(fecha_fin);
+        String tipoServicioMayuscula = tipo_servicio.toUpperCase();
+        String letraC = "C";
+        System.out.println("[DtoReporte] Fechas convertidas: inicio=" + fecha_inicial + ", fin=" + fecha_final);
+        System.out.println("[DtoReporte] Tipo de servicio recibido: " + tipo_servicio);
+        System.out.println("[DtoReporte] Tipo de servicio convertido a mayúscula: " + tipoServicioMayuscula);
+
         String query = "SELECT s.service_type, COUNT(p.id) AS total_pagos, SUM(p.total) AS total_ingresos " +
                        "FROM payments p " +
                        "JOIN services s ON p.service_id = s.id " +
-                       "WHERE p.date BETWEEN ? AND ? AND s.service_type = ? " +
+                       "WHERE p.date BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD') " +
+                       "AND s.service_type = ? " +
                        "GROUP BY s.service_type;";
 
-        PreparedStatement ps = conexion.EstablecerConexion().prepareStatement(query);
-        ps.setDate(1, fecha_inicial);
-        ps.setDate(2, fecha_final);
-        ps.setString(3, tipo_servicio); // Parámetro de tipo de servicio siempre presente
+        PreparedStatement ps = null;
+        ResultSet set = null;
 
-    System.out.println("Query ejecutado: " + ps);
-        
-        /*
-        // Construimos el query dinámicamente según si se filtra por tipo de servicio o no
-        String query = "SELECT s.service_type, COUNT(p.id) AS total_pagos, SUM(p.total) AS total_ingresos " +
-                       "FROM payments p " +
-                       "JOIN services s ON p.service_id = s.id " +
-                       "WHERE p.date BETWEEN ? AND ? ";
+        try {
+            ps = conexion.EstablecerConexion().prepareStatement(query);
+            ps.setString(1, fecha_inicial);
+            ps.setString(2, fecha_final);
+            ps.setString(3, letraC);
+            System.out.println("[DtoReporte] Query generado: " + ps);
 
-        if (tipo_servicio != null && !tipo_servicio.isEmpty()) {
-            query += "AND s.service_type = ? "; // Filtrar por tipo de servicio si se proporciona
+            set = ps.executeQuery();
+            System.out.println("[DtoReporte] Query ejecutado con éxito");
+
+            List<String[]> resultados = new ArrayList<>();
+            resultados.add(new String[]{"Tipo Servicio", "Total Pagos", "Total Ingresos"});
+
+            while (set.next()) {
+                resultados.add(new String[]{
+                    set.getString("service_type"),
+                    String.valueOf(set.getInt("total_pagos")),
+                    String.valueOf(set.getFloat("total_ingresos"))
+                });
+            }
+            
+            if (resultados.size() == 1) { // Si solo está el encabezado, no hay datos
+                System.out.println("[DtoReporte] No se encontraron resultados para el rango especificado");
+                resultados.add(new String[] { "Sin datos", "0", "0.00" });
+            }
+
+            String bodyHtml = generarHTMLTabla(resultados);
+            SendEmail sendEmail = new SendEmail();
+            sendEmail.responseEmail(emailFrom, bodyHtml);
+
+            return imprimirTabla.mostrarTabla(resultados);
+        } catch (SQLException e) {
+            System.err.println("[DtoReporte] Error al ejecutar el query: " + e.getMessage());
+            throw e;
+        } finally {
+            if (set != null) set.close();
+            if (ps != null) ps.close();
+            conexion.CerrarConexion();
+            System.out.println("[DtoReporte] Conexión cerrada");
         }
-        
-        query += "GROUP BY s.service_type;";
-
-        PreparedStatement ps = conexion.EstablecerConexion().prepareStatement(query);
-*/
-        /*
-        ps.setDate(1, fecha_inicial);
-        ps.setDate(2, fecha_final);
-
-        if (tipo_servicio != null && !tipo_servicio.isEmpty()) {
-            ps.setString(3, tipo_servicio); // Se añade el parámetro del tipo de servicio
-        }
-        
-        System.out.println("Query ejecutado: " + ps);
-*/
-        ResultSet set = ps.executeQuery();
-        List<String[]> resultados = new ArrayList<>();
-        resultados.add(new String[]{"Tipo Servicio", "Total Pagos", "Total Ingresos"});
-
-        while (set.next()) {
-            resultados.add(new String[]{
-                set.getString("service_type"),
-                String.valueOf(set.getInt("total_pagos")),
-                String.valueOf(set.getFloat("total_ingresos"))
-            });
-        }
-
-        String bodyHtml = generarHTMLTabla(resultados);
-        SendEmail sendEmail = new SendEmail();
-        sendEmail.responseEmail(emailFrom, bodyHtml);
-
-        return imprimirTabla.mostrarTabla(resultados);
     }
 
     // Generación de tabla HTML
@@ -122,6 +120,18 @@ public class DtoReporte {
         }
     }
     
+    private String convertirFechaFormatoCadena(String fechaStr) throws SQLException {
+        try {
+            SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatoSalida = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date fechaUtil = formatoEntrada.parse(fechaStr);
+            return formatoSalida.format(fechaUtil); // Retorna la fecha en formato yyyy-MM-dd como cadena
+        } catch (ParseException e) {
+            System.err.println("Error de formato en la fecha: " + fechaStr);
+            throw new SQLException("Formato de fecha inválido. Use 'dd/MM/yyyy'.");
+        }
+    }
+    
 
     public void desconectar() {
         if (conexion != null) {
@@ -131,6 +141,6 @@ public class DtoReporte {
 
     public String getComandos() {
         return "COMANDOS PARA CU: Reporte<br>" +
-               "reporte pagos [fecha_ini; fecha_fin; tipo_servicio (opcional)] (yyyy-mm-dd)<br>";
+               "reporte pagos [fecha_ini; fecha_fin; tipo_servicio (opcional)] (dd/MM/yyyy)<br>";
     }
 }
