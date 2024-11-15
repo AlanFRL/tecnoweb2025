@@ -1599,9 +1599,10 @@ public class Home {
                             //respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
                         } else {
                             System.out.println("demasiado parametros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARAMETROS");
                             if (true) {
                                 JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARAMETROS");
-                                respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARAMETROS");
+                                
                                 return;
                             }
                         }
@@ -1629,26 +1630,28 @@ public class Home {
                             if (event.getAction() == Token.HELP) {
                                 if (event.getParams().size() == 0) {
                                     System.out.println(reporte.getComandos());
+                                    respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(reporte.getComandos()));
                                     if (true) {
                                         JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(reporte.getComandos()));
-                                        respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(reporte.getComandos()));
                                         return;
                                     }
                                     
                                 } else {
                                     System.out.println("help No necesita parametros");
+                                    respuesta.responseUser(email.getFrom(), "COMANDO HELP NO NECESITA PARAMETROS");
                                     if (true) {
                                         JOptionPane.showMessageDialog(null, "COMANDO HELP NO NECESITA PARAMETROS");
-                                        respuesta.responseUser(email.getFrom(), "COMANDO HELP NO NECESITA PARAMETROS");
+                                        
                                         return;
                                     }
                                     
                                 }
                             } else {
                                 System.out.println("ACCION DESCONOCIDA de cu reporte");
+                                respuesta.responseUser(email.getFrom(), "COMANDO DESCONOCIDO");
                                 if (true) {
                                     JOptionPane.showMessageDialog(null, "COMANDO DESCONOCIDO");
-                                    respuesta.responseUser(email.getFrom(), "COMANDO DESCONOCIDO");
+                                    
                                     return;
                                 }
                                 
@@ -1659,9 +1662,10 @@ public class Home {
                     System.out.println("Mensaje SQL: " + ex.getMessage());
                     System.err.println("[Control] Error al ejecutar el reporte: " + ex.getMessage());
                     ex.printStackTrace();
+                    respuesta.responseUser(email.getFrom(), "MENSAJE SQL: " + ex.getMessage());
                     if (true) {
                         JOptionPane.showMessageDialog(null, "MENSAJE SQL: " + ex.getMessage());
-                        respuesta.responseUser(email.getFrom(), "MENSAJE SQL: " + ex.getMessage());
+                        
                         return;
                     }
                     
