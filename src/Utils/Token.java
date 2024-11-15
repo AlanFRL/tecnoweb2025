@@ -37,6 +37,9 @@ public class Token {
     public static final int HELP = 206;
     public static final int REGISTRAR = 209;
     public static final int ALTA = 210;
+    public static final int PAGOS = 211;
+    public static final int MEDICOS = 212;
+    public static final int PACIENTES = 213;
 
     public static final int ERROR_COMMAND = 300;
     public static final int ERROR_CHARACTER = 301;
@@ -74,6 +77,9 @@ public class Token {
     public static final String LEXEME_REGISTRAR = "registrar";
     public static final String LEXEME_HELP = "help";
     public static final String LEXEME_ALTA = "alta";
+    public static final String LEXEME_PAGOS = "pagos";
+    public static final String LEXEME_MEDICOS = "medicos";
+    public static final String LEXEME_PACIENTES = "pacientes";
 
     public static final String LEXEME_ERROR_COMMAND = "UNKNOWN COMMAND";
     public static final String LEXEME_ERROR_CHARACTER = "UNKNOWN CHARACTER";
@@ -209,6 +215,12 @@ public class Token {
                 return LEXEME_REGISTRAR;
             case ALTA:
                 return LEXEME_ALTA;
+            case PAGOS:
+                return LEXEME_PAGOS;
+            case MEDICOS:
+                return LEXEME_MEDICOS;
+            case PACIENTES:
+                return LEXEME_PACIENTES;
 
             case ERROR_COMMAND:
                 return LEXEME_ERROR_COMMAND;
@@ -288,6 +300,12 @@ public class Token {
                 return REGISTRAR;
             case LEXEME_ALTA:
                 return ALTA;
+            case LEXEME_PAGOS:
+                return PAGOS;
+            case LEXEME_MEDICOS:
+                return MEDICOS;
+            case LEXEME_PACIENTES:
+                return PACIENTES;
             case LEXEME_ERROR_COMMAND:
                 return ERROR_COMMAND;
             case LEXEME_ERROR_CHARACTER:

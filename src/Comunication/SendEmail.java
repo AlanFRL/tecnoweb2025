@@ -223,17 +223,20 @@ public class SendEmail {
     public String mensajeTexto(String emailFrom, String salto) {
         String comando = "PARA ACCEDER A LOS COMANDOS DE CADA CASO DE USO" + salto
                 + "USAR LOS SIGUIENTES COMANDOS:" + salto
-                + "usuario help" + salto
-                + "almacen help" + salto
-                + "paquete help" + salto
-                + "guia help" + salto
-                + "seguimiento help" + salto
-                + "tarifa help" + salto
+                + "paciente help" + salto
+                + "responsable help" + salto
+                + "doctor help" + salto
+                + "empleado help" + salto
+                + "consulta help" + salto
                 + "pago help" + salto
-                + "reporte help" + salto
-                + "venta help" + salto
-                + "detalleventa help" + salto
-                + "persona help"; // Agregado el comando persona help
+                + "ficha help" + salto
+                + "tratamiento help" + salto
+                + "asociar help" + salto
+                + "producto help" + salto
+                + "sala help" + salto
+                + "vacuna help" + salto
+                + "seguimiento help" + salto
+                + "reporte help";
 
         String bodyhtml = "<html>"
                 + "<body>"
