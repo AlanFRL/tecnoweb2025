@@ -1579,7 +1579,7 @@ public class Home {
                     }
                 }
             }
-            
+
             @Override
             public void reporte(TokenEvent event) {
                 System.out.println("CU: REPORTE");
@@ -1588,7 +1588,7 @@ public class Home {
                     if (event.getAction() == Token.PAGOS) {
                         if (event.getParams().size() == 3) {
                             System.out.println("antes de ejecutar reporte pagos");
-                            String lista = reporte.pagos(emailFrom,event.getParams());
+                            String lista = reporte.pagos(emailFrom, event.getParams());
                             System.out.println("despues de ejecutar reporte pagos");
                             System.out.println(lista);
                             System.out.println("listar ok");
@@ -1602,62 +1602,79 @@ public class Home {
                             respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARAMETROS");
                             if (true) {
                                 JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARAMETROS");
-                                
+
                                 return;
                             }
                         }
-                    } /*else {
-                        if (event.getAction() == Token.VENTAS) {
-                            if (event.getParams().size() == 0) {
-                                String lista = reporte.ventas(emailFrom);
-                                System.out.println(lista);
-                                System.out.println("listar ok");
-                                if (true) {
-                                    JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
-                                    return;
-                                }
-                                respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
-                            } else {
-                                System.out.println("demasiado parametros");
-                                if (true) {
-                                    JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARAMETROS");
-                                    return;
-                                }
-                                respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARAMETROS");
+                    } else if (event.getAction() == Token.CONSULTAS) {
+                        if (event.getParams().size() == 3) {
+                            String lista = reporte.consultas(emailFrom, event.getParams());
+                            System.out.println(lista);
+                            System.out.println("listar ok");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
+                                return;
                             }
-                        }*/ else {
+                        } else {
+                            System.out.println("demasiado parametros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARAMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARAMETROS");
+                                return;
+                            }
 
-                            if (event.getAction() == Token.HELP) {
-                                if (event.getParams().size() == 0) {
-                                    System.out.println(reporte.getComandos());
-                                    respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(reporte.getComandos()));
-                                    if (true) {
-                                        JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(reporte.getComandos()));
-                                        return;
-                                    }
-                                    
-                                } else {
-                                    System.out.println("help No necesita parametros");
-                                    respuesta.responseUser(email.getFrom(), "COMANDO HELP NO NECESITA PARAMETROS");
-                                    if (true) {
-                                        JOptionPane.showMessageDialog(null, "COMANDO HELP NO NECESITA PARAMETROS");
-                                        
-                                        return;
-                                    }
-                                    
-                                }
-                            } else {
-                                System.out.println("ACCION DESCONOCIDA de cu reporte");
-                                respuesta.responseUser(email.getFrom(), "COMANDO DESCONOCIDO");
-                                if (true) {
-                                    JOptionPane.showMessageDialog(null, "COMANDO DESCONOCIDO");
-                                    
-                                    return;
-                                }
-                                
+                        }
+                    } else if (event.getAction() == Token.HISTORIAL) {
+                        if (event.getParams().size() == 1) {
+                            String lista = reporte.historial(emailFrom, event.getParams());
+                            System.out.println(lista);
+                            System.out.println("listar ok");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
+                                return;
+                            }
+
+                        } else {
+                            System.out.println("demasiado parametros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARAMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARAMETROS");
+                                return;
                             }
                         }
-                    
+                    } else {
+
+                        if (event.getAction() == Token.HELP) {
+                            if (event.getParams().size() == 0) {
+                                System.out.println(reporte.getComandos());
+                                respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(reporte.getComandos()));
+                                if (true) {
+                                    JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(reporte.getComandos()));
+                                    return;
+                                }
+
+                            } else {
+                                System.out.println("help No necesita parametros");
+                                respuesta.responseUser(email.getFrom(), "COMANDO HELP NO NECESITA PARAMETROS");
+                                if (true) {
+                                    JOptionPane.showMessageDialog(null, "COMANDO HELP NO NECESITA PARAMETROS");
+
+                                    return;
+                                }
+
+                            }
+                        } else {
+                            System.out.println("ACCION DESCONOCIDA de cu reporte");
+                            respuesta.responseUser(email.getFrom(), "COMANDO DESCONOCIDO");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "COMANDO DESCONOCIDO");
+
+                                return;
+                            }
+
+                        }
+                    }
+
                 } catch (Exception ex) {
                     System.out.println("Mensaje SQL: " + ex.getMessage());
                     System.err.println("[Control] Error al ejecutar el reporte: " + ex.getMessage());
@@ -1665,15 +1682,14 @@ public class Home {
                     respuesta.responseUser(email.getFrom(), "MENSAJE SQL: " + ex.getMessage());
                     if (true) {
                         JOptionPane.showMessageDialog(null, "MENSAJE SQL: " + ex.getMessage());
-                        
+
                         return;
                     }
-                    
+
                 }
             }
-        }  
+        }
         );
-                
 
         Thread thread = new Thread(interpreter);
         thread.setName("Interpreter Thread");

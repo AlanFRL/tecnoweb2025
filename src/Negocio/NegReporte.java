@@ -22,9 +22,21 @@ public class NegReporte {
     }
 
     public String pagos(String emailFrom,List<String> parametros) throws SQLException {
-        String pagos = dtoReporte.pagos(emailFrom, parametros.get(0), parametros.get(1), parametros.get(2));
+        String pagos = dtoReporte.pagos(emailFrom, parametros.get(0), parametros.get(1), Integer.parseInt(parametros.get(2)));
         dtoReporte.desconectar();
         return pagos;
+    }
+    
+    public String consultas(String emailFrom,List<String> parametros) throws SQLException {
+        String consultas = dtoReporte.consultas(emailFrom, parametros.get(0), parametros.get(1), Integer.parseInt(parametros.get(2)));
+        dtoReporte.desconectar();
+        return consultas;
+    }
+    
+    public String historial(String emailFrom,List<String> parametros) throws SQLException {
+        String historial = dtoReporte.historial(emailFrom, Integer.parseInt(parametros.get(0)));
+        dtoReporte.desconectar();
+        return historial;
     }
     
     /*
