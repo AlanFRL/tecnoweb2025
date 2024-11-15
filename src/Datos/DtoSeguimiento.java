@@ -166,7 +166,7 @@ public class DtoSeguimiento {
         return "COMANDOS PARA CU: SEGUIMIENTO<br>"
                 + "seguimiento listar<br>"
                 + "seguimiento agregar [tratamiento_id(int);doctor_id(int);fecha(string);peso(float);estatura(float);edad(int);descripcion(string)]<br>"
-                + "seguimiento modificar [id(int);tratamiento_id(int);doctor_id(int);fecha(string);peso(float);estatura(float);edad(int);descripcion(string)]<br>"
+                + "seguimiento modificar [id(int);tratamiento_id(int);doctor_id(int);fecha(dd/MM/yyyy);peso(float);estatura(float);edad(int);descripcion(string)]<br>"
                 + "seguimiento eliminar [id]";
     }
 }

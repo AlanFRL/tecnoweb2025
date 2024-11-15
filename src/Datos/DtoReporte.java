@@ -34,7 +34,7 @@ public class DtoReporte {
         String fecha_inicial = convertirFechaFormatoCadena(fecha_ini);
         String fecha_final = convertirFechaFormatoCadena(fecha_fin);
         String tipoServicioMayuscula = tipo_servicio.toUpperCase();
-        String letraC = "C";
+        
         System.out.println("[DtoReporte] Fechas convertidas: inicio=" + fecha_inicial + ", fin=" + fecha_final);
         System.out.println("[DtoReporte] Tipo de servicio recibido: " + tipo_servicio);
         System.out.println("[DtoReporte] Tipo de servicio convertido a mayúscula: " + tipoServicioMayuscula);
@@ -53,7 +53,7 @@ public class DtoReporte {
             ps = conexion.EstablecerConexion().prepareStatement(query);
             ps.setString(1, fecha_inicial);
             ps.setString(2, fecha_final);
-            ps.setString(3, letraC);
+            ps.setString(3, tipoServicioMayuscula);
             System.out.println("[DtoReporte] Query generado: " + ps);
 
             set = ps.executeQuery();
@@ -141,6 +141,6 @@ public class DtoReporte {
 
     public String getComandos() {
         return "COMANDOS PARA CU: Reporte<br>" +
-               "reporte pagos [fecha_ini; fecha_fin; tipo_servicio (opcional)] (dd/MM/yyyy)<br>";
+               "reporte pagos [fecha_ini(dd/MM/yyyy); fecha_fin(dd/MM/yyyy); tipo_servicio(Opciones: C, V, T, vacio)] <br>";
     }
 }
