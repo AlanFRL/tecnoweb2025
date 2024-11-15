@@ -271,6 +271,8 @@ public class DtoReporte {
 
     public String getComandos() {
         return "COMANDOS PARA CU: Reporte<br>" +
-               "reporte pagos [fecha_ini(dd/MM/yyyy); fecha_fin(dd/MM/yyyy); tipo_servicio(Opciones: C, V, T, vacio)] <br>";
+               "reporte pagos [fecha_ini(dd/MM/yyyy); fecha_fin(dd/MM/yyyy); patientId(int)] <br>"
+                + "reporte consultas [fecha_ini(dd/MM/yyyy); fecha_fin(dd/MM/yyyy); doctorId(int)] <br>"
+                + "reporte historial [patientId(int)] <br>";
     }
 }
