@@ -86,7 +86,7 @@ public class Home {
                             String lista = empleado.listar(emailFrom);
                             System.out.println(lista);
                             System.out.println("listar ok");
-                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
+                            //respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
                             if (true) {
                                 JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
                                 return;
@@ -207,7 +207,7 @@ public class Home {
                             String lista = doctor.listar(emailFrom);
                             System.out.println(lista);
                             System.out.println("listar ok");
-                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
+                            //respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
                             if (true) {
                                 JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
                                 return;
@@ -326,7 +326,7 @@ public class Home {
                             String lista = paciente.listar(emailFrom);
                             System.out.println(lista);
                             System.out.println("listar ok");
-                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
+                            //respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
                             if (true) {
                                 JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
                                 return;
@@ -436,7 +436,7 @@ public class Home {
                             String lista = responsable.listar(emailFrom);
                             System.out.println(lista);
                             System.out.println("listar ok");
-                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
+                            //respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
                             if (true) {
                                 JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
                                 return;
@@ -550,7 +550,7 @@ public class Home {
                             }
                         } else {
                             System.out.println("demasiados parámetros");
-                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            //respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
                             if (true) {
                                 JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
                                 return;
@@ -649,7 +649,7 @@ public class Home {
                         if (event.getParams().size() == 0) {
                             String lista = sala.listar(event.getSender());
                             System.out.println(lista);
-                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
+                            //respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(lista));
                             if (true) {
                                 JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
                                 return;

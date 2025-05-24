@@ -1,5 +1,5 @@
 
-package P1TecnoWeb;
+package tecnoweb2025;
 
 import Comunication.Home;
 import Comunication.SendEmail;

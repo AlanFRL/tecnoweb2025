@@ -21,7 +21,7 @@
 
 1. **Clonar el repositorio**:
    ```bash
-   git clone https://github.com/JesusJaldin2002/P1TecnoWeb.git
+   git clone https://github.com/JesusJaldin2002/tecnoweb2025.git
    ```
 
 2. **Configurar la Base de Datos**: 🔧 Asegúrate de tener configurada tu base de datos PostgreSQL con las credenciales correspondientes.
