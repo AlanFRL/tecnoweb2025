@@ -20,7 +20,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         iniciar = new Home();
         enviar = new SendEmail();
-        this.setTitle("Primer parcial INF513-SA ---- GRUPO04SA ");
+        this.setTitle("Primer parcial INF513-SC ---- GRUPO14SC ");
         this.setLocationRelativeTo(null);
     }
 

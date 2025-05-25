@@ -64,14 +64,14 @@ public class SendEmail {
 
             // Crear el mensaje de correo
             MimeMessage mensaje = new MimeMessage(s);
-            mensaje.setFrom(new InternetAddress("grupo004sa@gmail.com"));
+            mensaje.setFrom(new InternetAddress("alanfromerol@gmail.com"));
             mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(emailReceptor));
             mensaje.setSubject("NOTIFICACION");
             mensaje.setText(data); // Establecer el texto del mensaje
 
             // Establecer la conexión con el servidor SMTP y enviar el mensaje
             Transport t = s.getTransport("smtp");
-            t.connect("grupo004sa@gmail.com", "cxlhqruueybqklkk");
+            t.connect("alanfromerol@gmail.com", "jeskuutndurgzwpv");
             System.out.println("Enviando respuesta al comando...");
             t.sendMessage(mensaje, mensaje.getAllRecipients());
             t.close();
@@ -163,13 +163,13 @@ public class SendEmail {
             Session s = Session.getDefaultInstance(p);
 
             MimeMessage mensaje = new MimeMessage(s);
-            mensaje.setFrom(new InternetAddress("grupo004sa@gmail.com"));
+            mensaje.setFrom(new InternetAddress("alanfromerol@gmail.com"));
             mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(emailReceptor));
             mensaje.setSubject("NOTIFICACION");
             //mensaje.setText("informacion");
             mensaje.setContent(codigoHTML, "text/html");//
             Transport t = s.getTransport("smtp");
-            t.connect("grupo004sa@gmail.com", "cxlhqruueybqklkk");
+            t.connect("alanfromerol@gmail.com", "jeskuutndurgzwpv");
             System.out.println("enviando...");
             t.sendMessage(mensaje, mensaje.getAllRecipients());
             t.close();
@@ -191,12 +191,12 @@ public class SendEmail {
             Session s = Session.getDefaultInstance(p);
 
             MimeMessage mensaje = new MimeMessage(s);
-            mensaje.setFrom(new InternetAddress("grupo004sa@gmail.com"));
+            mensaje.setFrom(new InternetAddress("alanfromerol@gmail.com"));
             mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(receptor));
             mensaje.setSubject(subject);
             mensaje.setText("enviado");
             Transport t = s.getTransport("smtp");
-            t.connect("grupo004sa@gmail.com", "cxlhqruueybqklkk");
+            t.connect("alanfromerol@gmail.com", "jeskuutndurgzwpv");
             System.out.println("enviando...");
             t.sendMessage(mensaje, mensaje.getAllRecipients());
             t.close();

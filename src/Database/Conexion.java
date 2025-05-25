@@ -14,12 +14,18 @@ import java.sql.SQLException;
  * @author Usuario
  */
 public class Conexion {
-
+/*
     private final String DRIVER = "org.postgresql.Driver";
     private final String DB = "db_grupo04sa";
     private final String USER = "grupo04sa";
     private final String PASSWORD  = "grup004grup004*";
     private final String URL = "jdbc:postgresql://mail.tecnoweb.org.bo/";
+  */  
+    private final String DRIVER = "org.postgresql.Driver";
+    private final String DB = "tecnoweb22024";
+    private final String USER = "postgres";
+    private final String PASSWORD  = "8554";
+    private final String URL = "jdbc:postgresql://localhost:5432/";
         
 //    private final String DRIVER = "org.postgresql.Driver";
 //    private final String DB = "tecnoweb";
