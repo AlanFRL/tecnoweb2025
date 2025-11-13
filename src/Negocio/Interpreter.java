@@ -1,9 +1,9 @@
 package Negocio;
 
-import Interfaces.ITokenEventListener;
-import Datos.TokenCommand;
-import Utils.Token;
 import Comunication.TokenEvent;
+import Datos.TokenCommand;
+import Interfaces.ITokenEventListener;
+import Utils.Token;
 
 public class Interpreter implements Runnable {
 
@@ -108,6 +108,18 @@ public class Interpreter implements Runnable {
                 break;
             case Token.ASOCIAR:
                 listener.asociar(token_event);
+                sw = true;
+                break;
+            case Token.PROPIETARIO:
+                listener.propietario(token_event);
+                sw = true;
+                break;
+            case Token.CLIENTE:
+                listener.cliente(token_event);
+                sw = true;
+                break;
+            case Token.PROVEEDOR:
+                listener.proveedor(token_event);
                 sw = true;
                 break;
 

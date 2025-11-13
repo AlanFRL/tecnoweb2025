@@ -23,6 +23,11 @@ public interface ITokenEventListener {
     void consulta(TokenEvent event);
     void vacuna(TokenEvent event);
     void asociar(TokenEvent event);
+    
+    // LAVANDERÍA - CU1: Gestión de Usuarios
+    void propietario(TokenEvent event);
+    void cliente(TokenEvent event);
+    void proveedor(TokenEvent event);
 
     
     void error(TokenEvent event);

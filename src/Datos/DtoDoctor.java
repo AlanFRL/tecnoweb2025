@@ -169,7 +169,7 @@ public class DtoDoctor {
     public String getComandos() {
         return "COMANDOS PARA CU: DOCTOR<br>"
                 + "doctor listar<br>"
-                + "doctor agregar [ci; nombre; password; teléfono; dirección; número_ss]<br>"
+                + "doctor agregar [ci;nombre;password;teléfono; dirección; número_ss]<br>"
                 + "doctor modificar [id; ci; nombre; password; teléfono; dirección; número_ss]<br>"
                 + "doctor eliminar [id]";
     }

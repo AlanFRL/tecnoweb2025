@@ -22,6 +22,7 @@ import Negocio.NegProducto;
 import Negocio.NegVacuna;
 import Negocio.NegSeguimiento;
 import Negocio.NegReporte;
+import Negocio.NegPropietario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -71,6 +72,8 @@ public class Home {
         NegProducto producto = new NegProducto();
         NegSeguimiento seguimiento = new NegSeguimiento();
         NegReporte reporte = new NegReporte();
+        // LAVANDERÍA - CU1
+        NegPropietario propietario = new NegPropietario();
 
         Interpreter interpreter = new Interpreter(email.getSubject().toLowerCase(), email.getFrom());
         String emailFrom = interpreter.getSender();
@@ -1088,6 +1091,7 @@ public class Home {
 
             @Override
             public void posibleserrores(TokenEvent event) {
+                System.out.println("ENTRÓ A POSIBLES ERRORES");
                 String sms = "";
                 switch (event.getAction()) {
                     case Token.LISTAR:
@@ -1119,9 +1123,12 @@ public class Home {
                 if (sms != " ") {
                     if (true) {
                         JOptionPane.showMessageDialog(null, sms);
+                        System.out.println("ACABA DE MOSTRAR EL MESSAGEDIALOG");
                         return;
                     }
-                    respuesta.responseUser(email.getFrom(), sms);
+                    respuesta.responseUserOriginal(email.getFrom(), sms);
+                    System.out.println("ACABA DE MANDAR EL CORREO");
+                    //respuesta.responseUser(email.getFrom(), sms);
                     return;
                 }
                 System.out.println("no envio nada");
@@ -1647,7 +1654,8 @@ public class Home {
                         if (event.getAction() == Token.HELP) {
                             if (event.getParams().size() == 0) {
                                 System.out.println(reporte.getComandos());
-                                respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(reporte.getComandos()));
+                                respuesta.responseUserOriginal(email.getFrom(), respuesta.mensajeComandos(reporte.getComandos()));
+                                //respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(reporte.getComandos()));
                                 if (true) {
                                     JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(reporte.getComandos()));
                                     return;
@@ -1687,6 +1695,128 @@ public class Home {
                     }
 
                 }
+            }
+
+            @Override
+            public void propietario(TokenEvent event) {
+                SendEmail respuesta = new SendEmail();
+                System.out.println("CU: PROPIETARIO");
+
+                try {
+                    if (event.getAction() == Token.LISTAR) {
+                        if (event.getParams().size() == 0) {
+                            String lista = propietario.listar(event.getSender());
+                            System.out.println(lista);
+                            System.out.println("listar ok");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(lista));
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.AGREGAR) {
+                        if (event.getParams().size() == 5) { // nombre, telefono, email, password, razon_social
+                            propietario.agregar(event.getParams());
+                            System.out.println("agregación ok");
+                            respuesta.responseUser(email.getFrom(), "SE AGREGARON LOS DATOS DEL PROPIETARIO CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE AGREGARON LOS DATOS DEL PROPIETARIO CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.MODIFICAR) {
+                        if (event.getParams().size() == 6) { // id, nombre, telefono, email, password, razon_social
+                            propietario.modificar(event.getParams());
+                            System.out.println("modificación ok");
+                            respuesta.responseUser(email.getFrom(), "SE MODIFICARON LOS DATOS DEL PROPIETARIO CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE MODIFICARON LOS DATOS DEL PROPIETARIO CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.ELIMINAR) {
+                        if (event.getParams().size() == 1) { // id
+                            propietario.eliminar(Integer.parseInt(event.getParams().get(0)));
+                            System.out.println("eliminación ok");
+                            respuesta.responseUser(email.getFrom(), "SE ELIMINARON LOS DATOS DEL PROPIETARIO CORRECTAMENTE");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "SE ELIMINARON LOS DATOS DEL PROPIETARIO CORRECTAMENTE");
+                                return;
+                            }
+                        } else {
+                            System.out.println("demasiados parámetros");
+                            respuesta.responseUser(email.getFrom(), "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "ERROR EN LA CANTIDAD DE PARÁMETROS");
+                                return;
+                            }
+                        }
+                    } else if (event.getAction() == Token.HELP) {
+                        if (event.getParams().size() == 0) {
+                            System.out.println(propietario.getComandos());
+                            respuesta.responseUser(email.getFrom(), respuesta.mensajeComandos(propietario.getComandos()));
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, respuesta.mensajeComandos(propietario.getComandos()));
+                                return;
+                            }
+                        } else {
+                            System.out.println("help no necesita parámetros");
+                            respuesta.responseUser(email.getFrom(), "COMANDO DESCONOCIDO");
+                            if (true) {
+                                JOptionPane.showMessageDialog(null, "COMANDO DESCONOCIDO");
+                                return;
+                            }
+                        }
+                    } else {
+                        System.out.println("ACCIÓN DESCONOCIDA DE CU: PROPIETARIO");
+                        respuesta.responseUser(email.getFrom(), "COMANDO DESCONOCIDO");
+                        if (true) {
+                            JOptionPane.showMessageDialog(null, "COMANDO DESCONOCIDO");
+                            return;
+                        }
+                    }
+                } catch (Exception ex) {
+                    System.out.println("Mensaje SQL: " + ex.getMessage());
+                    respuesta.responseUser(email.getFrom(), "MENSAJE SQL: " + ex.getMessage());
+                    if (true) {
+                        JOptionPane.showMessageDialog(null, "MENSAJE SQL: " + ex.getMessage());
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void cliente(TokenEvent event) {
+                // TODO: Implementar cuando creemos DtoCliente
+                SendEmail respuesta = new SendEmail();
+                respuesta.responseUser(email.getFrom(), "CLIENTE: CU NO IMPLEMENTADO AÚN");
+            }
+
+            @Override
+            public void proveedor(TokenEvent event) {
+                // TODO: Implementar cuando creemos DtoProveedor
+                SendEmail respuesta = new SendEmail();
+                respuesta.responseUser(email.getFrom(), "PROVEEDOR: CU NO IMPLEMENTADO AÚN");
             }
         }
         );

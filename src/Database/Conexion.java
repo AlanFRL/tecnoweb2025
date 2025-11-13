@@ -22,7 +22,7 @@ public class Conexion {
     private final String URL = "jdbc:postgresql://mail.tecnoweb.org.bo/";
   */  
     private final String DRIVER = "org.postgresql.Driver";
-    private final String DB = "tecnoweb22024";
+    private final String DB = "lavanderia";
     private final String USER = "postgres";
     private final String PASSWORD  = "8554";
     private final String URL = "jdbc:postgresql://localhost:5432/";
@@ -48,12 +48,36 @@ public class Conexion {
     }
 
     public Connection EstablecerConexion() {
+        System.out.println("=== INTENTANDO CONECTAR A LA BASE DE DATOS ===");
+        System.out.println("Driver: " + DRIVER);
+        System.out.println("URL Completa: " + (this.URL + this.DB));
+        System.out.println("Usuario: " + USER);
+        System.out.println("Password: " + PASSWORD);
+        System.out.println("===============================================");
 
         try {
+            System.out.println("Cargando driver PostgreSQL...");
             Class.forName(DRIVER);
+            System.out.println("Driver cargado exitosamente!");
+            
+            System.out.println("Intentando establecer conexión...");
             this.con = DriverManager.getConnection(this.URL + this.DB, this.USER, this.PASSWORD);
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Error DB: " + e);
+            
+            if (this.con != null) {
+                System.out.println("✓ CONEXIÓN EXITOSA A LA BASE DE DATOS!");
+            } else {
+                System.err.println("✗ CONEXIÓN RETORNÓ NULL");
+            }
+        } catch (ClassNotFoundException e) {
+            System.err.println("✗ ERROR: No se encontró el driver de PostgreSQL");
+            System.err.println("Detalle: " + e.getMessage());
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.err.println("✗ ERROR SQL al conectar a la base de datos");
+            System.err.println("Detalle: " + e.getMessage());
+            System.err.println("SQLState: " + e.getSQLState());
+            System.err.println("ErrorCode: " + e.getErrorCode());
+            e.printStackTrace();
         }
         return this.con;
     }

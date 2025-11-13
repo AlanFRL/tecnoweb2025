@@ -30,7 +30,8 @@ public class SendEmail {
 
     private final static int PORT_SMTP = 25;
     private final static String SERVER = "mail.tecnoweb.org.bo";
-    private final static String user_emisor = "grupo04sa@tecnoweb.org.bo";
+    private final static String user_emisor = "grupo26sc@tecnoweb.org.bo";
+    // private final static String user_emisor = "grupo04sa@tecnoweb.org.bo";
     private static String user_receptor;
     private static Socket socket;
     private static BufferedReader entrada;
@@ -50,6 +51,17 @@ public class SendEmail {
     }
 
     public void responseUser(String emailReceptor, String data) {
+        try {
+            // En lugar de usar JavaMail, usamos nuestro método SMTP manual
+            responseUserOriginal(emailReceptor, data, false);
+            System.out.println("Respuesta enviada al comando: " + data);
+        } catch (Exception ex) {
+            Logger.getLogger(SendEmail.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Correo no enviado.");
+        }
+    }
+
+    public void responseUser2(String emailReceptor, String data) {
         try {
             // Establecer las propiedades para el envío de correo
             Properties p = new Properties();
@@ -82,8 +94,74 @@ public class SendEmail {
         }
     }
 
-    // Método original responseUser copiado sin cambios
+    // Nuevo método responseUserOriginal
+    public void responseUserOriginal(String Receptor, String data, boolean isHtml) {
+        System.out.println("ENTRANDO A RESPONSE USER ORIGINAL ");
+        String comando = "";
+        try {
+            socket = new Socket(SERVER, PORT_SMTP);
+            entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            salida = new DataOutputStream(socket.getOutputStream());
+
+            if (socket != null && entrada != null && salida != null) {
+                System.out.println("S : " + entrada.readLine()); // Leer saludo del servidor
+
+                comando = "HELO " + SERVER + "\r\n";
+                salida.writeBytes(comando);
+                System.out.println("S : " + entrada.readLine());
+
+                comando = "MAIL FROM: <" + user_emisor + "> \r\n";
+                salida.writeBytes(comando);
+                System.out.println("S : " + entrada.readLine());
+
+                comando = "RCPT TO: <" + Receptor + "> \r\n";
+                salida.writeBytes(comando);
+                System.out.println("S : " + entrada.readLine());
+
+                comando = "DATA\r\n";
+                salida.writeBytes(comando);
+                System.out.println("S : " + entrada.readLine());
+
+                // Determinar el tipo de contenido basado en el parámetro
+                if (isHtml) {
+                    comando = "Subject: NOTIFICACION\r\n" +
+                            "MIME-Version: 1.0\r\n" +
+                            "Content-Type: text/html; charset=UTF-8\r\n\r\n" +
+                            data + "\r\n.\r\n";
+                } else {
+                    comando = "Subject: NOTIFICACION\r\n\r\n" + data + "\r\n.\r\n";
+                }
+
+                salida.writeBytes(comando);
+                System.out.println("S : " + entrada.readLine());
+
+                comando = "QUIT\r\n";
+                salida.writeBytes(comando);
+                System.out.println("S : " + entrada.readLine());
+
+                // Mensaje para confirmar que se envió la respuesta
+                System.out.println("Respuesta al comando enviada: " + data);
+            }
+
+            salida.close();
+            entrada.close();
+            socket.close();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+            System.out.println(" S : No se pudo conectar con el servidor indicado");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Mantener compatibilidad con el método original
     public void responseUserOriginal(String Receptor, String data) {
+        responseUserOriginal(Receptor, data, false);
+    }
+
+    // Método original responseUser copiado sin cambios
+    public void responseUserOriginalOriginal(String Receptor, String data) {
+        System.out.println("ENTRANDO A RESPONSE USER ORIGINAL ");
         String comando = "";
         try {
             socket = new Socket(SERVER, PORT_SMTP);
@@ -154,6 +232,19 @@ public class SendEmail {
     ///////////////////////////////////////////////////////////////
     public void responseEmail(String emailReceptor, String codigoHTML) {
         try {
+            // En lugar de usar JavaMail, usamos nuestro método SMTP manual
+            responseUserOriginal(emailReceptor, codigoHTML, true);
+            System.out.println("mensaje enviado");
+        } catch (Exception ex) {
+            Logger.getLogger(SendEmail.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("correo no enviado");
+        }
+    }
+
+    ///
+    ///
+    public void responseEmailOriginal(String emailReceptor, String codigoHTML) {
+        try {
             Properties p = new Properties();
             p.put("mail.smtp.host", "smtp.gmail.com");
             p.put("mail.smtp.starttls.enable", "true");
@@ -166,7 +257,7 @@ public class SendEmail {
             mensaje.setFrom(new InternetAddress("alanfromerol@gmail.com"));
             mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(emailReceptor));
             mensaje.setSubject("NOTIFICACION");
-            //mensaje.setText("informacion");
+            // mensaje.setText("informacion");
             mensaje.setContent(codigoHTML, "text/html");//
             Transport t = s.getTransport("smtp");
             t.connect("alanfromerol@gmail.com", "jeskuutndurgzwpv");
@@ -247,7 +338,8 @@ public class SendEmail {
                 + "</html>";
 
         System.out.println(emailFrom);
-        responseEmail(emailFrom, bodyhtml);
+        // responseEmail(emailFrom, bodyhtml);
+        responseUserOriginal(emailFrom, bodyhtml, true);
         return comando;
     }
 

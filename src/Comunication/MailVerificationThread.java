@@ -17,9 +17,14 @@ import Utils.Extractor;
 public class MailVerificationThread implements Runnable {
 
     private final static int PORT_POP = 110;
+    /*
     private final static String HOST = "www.tecnoweb.org.bo";
     private final static String USER = "grupo04sa";
     private final static String PASSWORD = "grup004grup004*";
+*/
+    private final static String HOST = "www.tecnoweb.org.bo";
+    private final static String USER = "grupo26sc";
+    private final static String PASSWORD = "grup026grup026*";
 
     private Socket socket;
     private BufferedReader input;
@@ -50,7 +55,7 @@ public class MailVerificationThread implements Runnable {
                 input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 output = new DataOutputStream(socket.getOutputStream());
                 System.out.println("**************** Conexion establecida *************");
-
+                System.out.println("revisando cuenta: " + USER);
                 authUser(USER, PASSWORD);
 
                 int count = getEmailCount();

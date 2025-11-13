@@ -26,6 +26,10 @@ public class Token {
     public static final int VACUNA = 112;
     // PAPILLA
     public static final int ASOCIAR = 113;
+    // LAVANDERÍA - CU1
+    public static final int PROPIETARIO = 114;
+    public static final int CLIENTE = 115;
+    public static final int PROVEEDOR = 116;
 
     //ACCIONES        
     public static final int ELIMINAR = 200;
@@ -66,6 +70,10 @@ public class Token {
     public static final String LEXEME_CONSULTA = "consulta";
     public static final String LEXEME_VACUNA = "vacuna";
     public static final String LEXEME_ASOCIAR = "asociar";
+    // LAVANDERÍA - CU1
+    public static final String LEXEME_PROPIETARIO = "propietario";
+    public static final String LEXEME_CLIENTE = "cliente";
+    public static final String LEXEME_PROVEEDOR = "proveedor";
 
     //Titulos de las acciones generales en string
     public static final String LEXEME_ELIMINAR = "eliminar";
@@ -195,8 +203,14 @@ public class Token {
                 return LEXEME_VACUNA;
             case ASOCIAR:
                 return LEXEME_ASOCIAR;
+            case PROPIETARIO:
+                return LEXEME_PROPIETARIO;
+            case CLIENTE:
+                return LEXEME_CLIENTE;
+            case PROVEEDOR:
+                return LEXEME_PROVEEDOR;
 
-            //ACCION
+            //ACCION 
             case AGREGAR:
                 return LEXEME_AGREGAR;
             case ELIMINAR:
@@ -280,6 +294,12 @@ public class Token {
                 return VACUNA;
             case LEXEME_ASOCIAR:
                 return ASOCIAR;
+            case LEXEME_PROPIETARIO:
+                return PROPIETARIO;
+            case LEXEME_CLIENTE:
+                return CLIENTE;
+            case LEXEME_PROVEEDOR:
+                return PROVEEDOR;
 
             //ACTION                
             case LEXEME_ELIMINAR:

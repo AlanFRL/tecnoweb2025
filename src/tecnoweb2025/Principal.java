@@ -20,7 +20,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         iniciar = new Home();
         enviar = new SendEmail();
-        this.setTitle("Primer parcial INF513-SC ---- GRUPO14SC ");
+        this.setTitle("Primer parcial INF513-SC ---- GRUPO26SC ");
         this.setLocationRelativeTo(null);
     }
 
@@ -91,7 +91,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         iniciar.Iniciar();
-        Jtxf_to.setText("grupo04sa@tecnoweb.org.bo");
+        Jtxf_to.setText("grupo26sc@tecnoweb.org.bo");
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
